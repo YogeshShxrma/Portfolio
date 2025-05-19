@@ -22,6 +22,8 @@ export default {
             fontFamily: {
                 inter: ['Inter', 'sans-serif'],
                 spaceGrotesk: ['"Space Grotesk"', 'sans-serif'],
+                montserrat: ['Montserrat', 'sans-serif'],
+                raleway: ['Raleway', 'sans-serif'],
             },
 			colors: {
 				border: 'hsl(var(--border))',
@@ -66,7 +68,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                illuminated: {
+                    100: "#e5deff",
+                    200: "#d6bcfa",
+                    300: "#9b87f5",
+                    400: "#7E69AB",
+                    500: "#6357a1",
+                    600: "#4A3B82",
+                    700: "#322554",
+                    800: "#1A1F2C",
+                    900: "#121420",
+                }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -94,13 +107,25 @@ export default {
                     '0%': { opacity: '0', transform: 'translateY(10px)' },
                     '100%': { opacity: '1', transform: 'translateY(0)' }
                 },
+                'glow': {
+                    '0%, 100%': { 
+                        boxShadow: '0 0 12px 2px rgba(155, 135, 245, 0.2)',
+                        transform: 'scale(1)'
+                    },
+                    '50%': { 
+                        boxShadow: '0 0 20px 5px rgba(155, 135, 245, 0.4)', 
+                        transform: 'scale(1.01)'
+                    }
+                }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
                 'fade-in': 'fade-in 0.5s ease-out',
+                'glow-slow': 'glow 4s ease-in-out infinite',
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
