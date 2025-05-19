@@ -1,5 +1,5 @@
 
-import { Linkedin, Phone, MapPin } from "lucide-react";
+import { Linkedin, Phone, MapPin, Camera, Film, Palette } from "lucide-react";
 
 const ContactInfo = () => {
   return (
@@ -31,6 +31,24 @@ const ContactInfo = () => {
             <Linkedin size={20} />
           </a>
         </div>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-bold mb-4">Services</h2>
+        <ul className="space-y-3">
+          <li className="flex items-center">
+            <Camera className="mr-3 text-gray-600" size={18} />
+            <span>Professional Photo Editing</span>
+          </li>
+          <li className="flex items-center">
+            <Film className="mr-3 text-gray-600" size={18} />
+            <span>Video Production & Editing</span>
+          </li>
+          <li className="flex items-center">
+            <Palette className="mr-3 text-gray-600" size={18} />
+            <span>Creative Graphic Design</span>
+          </li>
+        </ul>
       </div>
     </div>
   );

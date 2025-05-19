@@ -14,7 +14,7 @@ const Footer = () => {
               Yogesh<span className="text-gray-400"> Sharma</span>
             </h3>
             <p className="text-gray-600 mb-4">
-              A creative technologist crafting engaging digital experiences.
+              A visual storyteller specializing in video editing, photo editing, and graphic design.
             </p>
             <div className="flex space-x-4">
               <a 

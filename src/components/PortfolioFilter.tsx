@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export type Category = "all" | "photos" | "videos" | "graphics";
@@ -11,10 +10,10 @@ interface PortfolioFilterProps {
 
 const PortfolioFilter = ({ onCategoryChange, activeCategory }: PortfolioFilterProps) => {
   const categories: { value: Category; label: string }[] = [
-    { value: "all", label: "All" },
-    { value: "photos", label: "Photos" },
-    { value: "videos", label: "Videos" },
-    { value: "graphics", label: "Graphics" }
+    { value: "all", label: "All Work" },
+    { value: "photos", label: "Photo Editing" },
+    { value: "videos", label: "Video Editing" },
+    { value: "graphics", label: "Graphic Design" }
   ];
 
   return (

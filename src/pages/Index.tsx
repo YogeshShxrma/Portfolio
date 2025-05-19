@@ -21,13 +21,13 @@ const Index = () => {
         <section className="min-h-screen flex flex-col justify-center relative px-4">
           <div className="container mx-auto max-w-5xl pt-20">
             <span className="text-gray-500 font-medium mb-4 block">
-              Creative Technologist
+              Visual Storyteller
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Crafting digital experiences at the intersection of design and technology
+              Bringing ideas to life through visual creativity and artistry
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl">
-              I'm Yogesh Sharma, bringing ideas to life through code, pixels, and creativity. Specializing in photos, videos, and graphic design.
+              I'm Yogesh Sharma, a passionate creative specializing in video editing, photo editing, and graphic design. Transforming concepts into compelling visual stories.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg">
@@ -62,26 +62,26 @@ const Index = () => {
                   About Me
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  I'm a creative technologist from Raipur, Chhattisgarh, India with over 5 years of experience in digital media production. My work spans photography, videography, and graphic design – all tied together by a passion for visual storytelling.
+                  I'm a visual creative from Raipur, Chhattisgarh, India with over 5 years of experience in digital media production. My work spans photography, videography, and graphic design – all tied together by a passion for visual storytelling.
                 </p>
                 <p className="text-gray-600 mb-4">
-                  With a background in both design and development, I bring a unique perspective to projects that bridges the gap between aesthetics and functionality.
+                  With a sharp eye for detail and a deep understanding of visual aesthetics, I craft compelling content that resonates with audiences and brings brands to life.
                 </p>
                 <p className="text-gray-600">
-                  I've collaborated with brands, startups, and creative agencies across India to create compelling visual narratives and interactive experiences that engage audiences and drive results.
+                  I've collaborated with brands, startups, and creative agencies across India to create compelling visual narratives and engaging media that leave lasting impressions.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-4">Expertise</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-medium mb-2">Photography</h4>
+                    <h4 className="font-medium mb-2">Photography & Photo Editing</h4>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div className="bg-black h-2 rounded-full" style={{ width: "95%" }}></div>
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2">Videography</h4>
+                    <h4 className="font-medium mb-2">Videography & Video Editing</h4>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div className="bg-black h-2 rounded-full" style={{ width: "90%" }}></div>
                     </div>
@@ -93,7 +93,7 @@ const Index = () => {
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2">Web Development</h4>
+                    <h4 className="font-medium mb-2">Motion Graphics</h4>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div className="bg-black h-2 rounded-full" style={{ width: "80%" }}></div>
                     </div>
@@ -109,7 +109,7 @@ const Index = () => {
           <div className="container mx-auto max-w-5xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-2">Featured Work</h2>
             <p className="text-gray-600 mb-12 max-w-2xl">
-              Selected projects from my portfolio demonstrating the range of my capabilities.
+              Selected projects from my portfolio demonstrating the range of my visual creativity.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

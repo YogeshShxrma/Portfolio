@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactInfo from "@/components/ContactInfo";
-import { Linkedin, Phone, MapPin } from "lucide-react";
+import { Linkedin, Phone, MapPin, Camera, Film, Palette } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -14,8 +14,8 @@ const Contact = () => {
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Have a project in mind or want to collaborate? 
-                I'd love to hear from you. Feel free to reach out through any of my channels.
+                Looking for professional photo editing, video production, or graphic design services? 
+                I'd love to hear from you. Feel free to reach out through any of my contact channels.
               </p>
             </div>
 
@@ -24,11 +24,22 @@ const Contact = () => {
                 <div className="text-center space-y-4">
                   <h2 className="text-2xl font-bold">Yogesh Sharma</h2>
                   <p className="text-gray-600">
-                    Creative Technologist based in Raipur, Chhattisgarh, India
+                    Visual Media Specialist based in Raipur, Chhattisgarh, India
                   </p>
-                  <p className="text-gray-600">
-                    Looking forward to working together on your next project.
-                  </p>
+                  <div className="flex justify-center space-x-6 pt-4">
+                    <div className="flex flex-col items-center">
+                      <Camera size={24} className="mb-2 text-gray-700" />
+                      <span className="text-sm">Photo Editing</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <Film size={24} className="mb-2 text-gray-700" />
+                      <span className="text-sm">Video Editing</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <Palette size={24} className="mb-2 text-gray-700" />
+                      <span className="text-sm">Graphic Design</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -65,7 +76,7 @@ const Contact = () => {
                 <div>
                   <h2 className="text-xl font-bold mb-4">Availability</h2>
                   <p className="text-gray-600">
-                    Currently available for freelance work and creative collaborations.
+                    Currently available for freelance visual media projects and creative collaborations across India.
                   </p>
                 </div>
               </div>
