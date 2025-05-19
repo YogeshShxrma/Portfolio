@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactInfo from "@/components/ContactInfo";
-import { Linkedin, Phone, MapPin, Camera, Film, Palette } from "lucide-react";
+import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -49,7 +49,7 @@ const Contact = () => {
                   <ul className="space-y-4">
                     <li className="flex items-start">
                       <Phone className="mr-3 text-gray-600 flex-shrink-0 mt-1" size={18} />
-                      <span>+91 9876543210</span>
+                      <span>+91 8827087768</span>
                     </li>
                     <li className="flex items-start">
                       <MapPin className="mr-3 text-gray-600 flex-shrink-0 mt-1" size={18} />
@@ -69,6 +69,15 @@ const Contact = () => {
                       aria-label="LinkedIn"
                     >
                       <Linkedin size={20} />
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/_.yogeshsharma._/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full transition-colors"
+                      aria-label="Instagram"
+                    >
+                      <Instagram size={20} />
                     </a>
                   </div>
                 </div>

@@ -41,7 +41,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <NavLink to="/" className="text-xl font-spaceGrotesk font-medium">
-          Creative<span className="text-gray-400">.Tech</span>
+          Illuminated<span className="text-gray-400">Pixels</span>
         </NavLink>
 
         {/* Desktop Navigation */}

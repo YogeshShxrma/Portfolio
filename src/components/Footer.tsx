@@ -1,5 +1,5 @@
 
-import { Linkedin } from "lucide-react";
+import { Linkedin, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-spaceGrotesk font-medium mb-4">
-              Yogesh<span className="text-gray-400"> Sharma</span>
+              Illuminated<span className="text-gray-400">Pixels</span>
             </h3>
             <p className="text-gray-600 mb-4">
               A visual storyteller specializing in video editing, photo editing, and graphic design.
@@ -25,6 +25,15 @@ const Footer = () => {
               >
                 <Linkedin size={20} />
                 <span className="sr-only">LinkedIn</span>
+              </a>
+              <a 
+                href="https://www.instagram.com/_.yogeshsharma._/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-800 transition-colors"
+              >
+                <Instagram size={20} />
+                <span className="sr-only">Instagram</span>
               </a>
             </div>
           </div>
@@ -52,7 +61,7 @@ const Footer = () => {
           
           <div>
             <h3 className="text-lg font-medium mb-4">Contact</h3>
-            <p className="text-gray-600 mb-1">+91 9876543210</p>
+            <p className="text-gray-600 mb-1">+91 8827087768</p>
             <p className="text-gray-600">Raipur, Chhattisgarh, India</p>
           </div>
         </div>
