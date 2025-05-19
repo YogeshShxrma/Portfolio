@@ -1,5 +1,5 @@
 
-import { Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,41 +11,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-spaceGrotesk font-medium mb-4">
-              Creative<span className="text-gray-400">.Tech</span>
+              Yogesh<span className="text-gray-400"> Sharma</span>
             </h3>
             <p className="text-gray-600 mb-4">
               A creative technologist crafting engaging digital experiences.
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-800 transition-colors"
-              >
-                <Twitter size={20} />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-800 transition-colors"
-              >
-                <Instagram size={20} />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-800 transition-colors"
-              >
-                <Github size={20} />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/yogesh-sharma-933205317/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-800 transition-colors"
@@ -79,14 +52,14 @@ const Footer = () => {
           
           <div>
             <h3 className="text-lg font-medium mb-4">Contact</h3>
-            <p className="text-gray-600 mb-1">hello@creative.tech</p>
-            <p className="text-gray-600">New York, NY</p>
+            <p className="text-gray-600 mb-1">+91 9876543210</p>
+            <p className="text-gray-600">Raipur, Chhattisgarh, India</p>
           </div>
         </div>
         
         <div className="border-t mt-12 pt-6">
           <p className="text-gray-500 text-sm text-center">
-            © {currentYear} Creative.Tech. All rights reserved.
+            © {currentYear} Yogesh Sharma. All rights reserved.
           </p>
         </div>
       </div>

@@ -27,7 +27,7 @@ const Index = () => {
               Crafting digital experiences at the intersection of design and technology
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl">
-              I bring ideas to life through code, pixels, and creativity. Specializing in photos, videos, and graphic design.
+              I'm Yogesh Sharma, bringing ideas to life through code, pixels, and creativity. Specializing in photos, videos, and graphic design.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg">
@@ -62,13 +62,13 @@ const Index = () => {
                   About Me
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  I'm a creative technologist with over 5 years of experience in digital media production. My work spans photography, videography, and graphic design – all tied together by a passion for visual storytelling.
+                  I'm a creative technologist from Raipur, Chhattisgarh, India with over 5 years of experience in digital media production. My work spans photography, videography, and graphic design – all tied together by a passion for visual storytelling.
                 </p>
                 <p className="text-gray-600 mb-4">
                   With a background in both design and development, I bring a unique perspective to projects that bridges the gap between aesthetics and functionality.
                 </p>
                 <p className="text-gray-600">
-                  I've collaborated with brands, startups, and creative agencies to create compelling visual narratives and interactive experiences that engage audiences and drive results.
+                  I've collaborated with brands, startups, and creative agencies across India to create compelling visual narratives and interactive experiences that engage audiences and drive results.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md">
