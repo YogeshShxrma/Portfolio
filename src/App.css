@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,11 +12,13 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em rgba(124, 100, 181, 0.6));
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em rgba(124, 100, 181, 0.6));
 }
 
 @keyframes logo-spin {
@@ -35,8 +38,83 @@
 
 .card {
   padding: 2em;
+  background-color: #fefefe;
+  border-radius: 8px;
+  position: relative;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7C64B5, #D49768, #5DA87A, #3E79A0);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #786F64;
+}
+
+/* Gond art inspired decorative elements */
+.gond-divider {
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 L20 5' stroke='%237C64B5' stroke-width='1' stroke-dasharray='2,2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  margin: 2rem 0;
+}
+
+.button-gond {
+  position: relative;
+  overflow: hidden;
+  background-color: #F2EFE6;
+  border: 1px solid #D8D0C0;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.button-gond:hover {
+  background-color: #E5DFD2;
+}
+
+.button-gond::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7C64B5, #D49768);
+}
+
+/* Gond art inspired image frame */
+.gond-frame {
+  position: relative;
+  padding: 10px;
+}
+
+.gond-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dashed #7C64B5;
+  pointer-events: none;
+}
+
+/* Gond art inspired section backgrounds */
+.gond-bg-1 {
+  background-color: #F2EFE6;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zm-24.596 0l-5.485 6.485 1.414 1.414 7.9-7.9h-2.83zm16.97 0l-7.071 7.07 1.415 1.415 8.485-8.485h-2.829zm-9.9 0l-8.486 8.485 1.415 1.415 9.9-9.9h-2.83zm-1.414 0L29.9 11.544l1.414 1.414 9.9-9.9h-2.83zm-14.85 0l-9.9 9.9 1.415 1.414 11.314-11.314h-2.83zm10.275 0L2.928 14.542l1.414 1.414 15.728-15.728h-2.83zm38.343 0L28.544 29.9l1.414 1.414 25.2-25.2h-2.83zM1.414 0L0 1.414l56.97 56.97 1.414-1.414L1.414 0zM56.97 0l-56.97 56.97 1.414 1.414L58.385 1.414 56.97 0z' fill='%237c64b5' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.gond-bg-2 {
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23D49768' fill-opacity='0.1'/%3E%3C/svg%3E");
 }
