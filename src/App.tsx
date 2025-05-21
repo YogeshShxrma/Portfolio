@@ -25,6 +25,7 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/portfolio/:id" element={<PortfolioItem />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin-login" element={<Index />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
