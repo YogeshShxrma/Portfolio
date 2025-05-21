@@ -1,20 +1,18 @@
-
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-
 const Index = () => {
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
+      aboutSection.scrollIntoView({
+        behavior: "smooth"
+      });
     }
   };
-
-  return (
-    <>
+  return <>
       <Navbar />
       <main>
         {/* Hero Section */}
@@ -36,7 +34,7 @@ const Index = () => {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild className="text-folk-purple border-folk-purple hover:bg-folk-purple/10">
-                <Link to="/contact">
+                <Link to="/contact" className="button colour to orange and hover bg colour to deep orange. change text font accordingly for better visiblity">
                   Get in Touch
                 </Link>
               </Button>
@@ -45,15 +43,12 @@ const Index = () => {
             {/* Gond art decorative element */}
             <div className="absolute right-0 top-1/4 transform translate-x-1/2 opacity-20 hidden lg:block">
               <div className="w-40 h-40 bg-contain bg-no-repeat" style={{
-                backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0 L120 40 L100 80 L80 120 L100 160 L120 200' stroke='%237C64B5' stroke-width='2' fill='none'/%3E%3Cpath d='M100 0 C140 40, 60 80, 100 120 C140 160, 60 200, 100 240' stroke='%235DA87A' stroke-width='2' fill='none'/%3E%3C/svg%3E\")"
-              }}></div>
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0 L120 40 L100 80 L80 120 L100 160 L120 200' stroke='%237C64B5' stroke-width='2' fill='none'/%3E%3Cpath d='M100 0 C140 40, 60 80, 100 120 C140 160, 60 200, 100 240' stroke='%235DA87A' stroke-width='2' fill='none'/%3E%3C/svg%3E\")"
+            }}></div>
             </div>
           </div>
           <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-            <button
-              onClick={scrollToAbout}
-              className="text-folk-text hover:text-folk-purple transition-colors flex flex-col items-center"
-            >
+            <button onClick={scrollToAbout} className="text-folk-text hover:text-folk-purple transition-colors flex flex-col items-center">
               <span className="mb-2 text-sm">Learn More</span>
               <ArrowDown size={20} className="animate-bounce" />
             </button>
@@ -87,7 +82,9 @@ const Index = () => {
                       Photography & Photo Editing
                     </h4>
                     <div className="w-full bg-folk-cream-dark rounded-full h-2">
-                      <div className="bg-folk-purple h-2 rounded-full" style={{ width: "95%" }}></div>
+                      <div className="bg-folk-purple h-2 rounded-full" style={{
+                      width: "95%"
+                    }}></div>
                     </div>
                   </div>
                   <div>
@@ -96,7 +93,9 @@ const Index = () => {
                       Videography & Video Editing
                     </h4>
                     <div className="w-full bg-folk-cream-dark rounded-full h-2">
-                      <div className="bg-folk-blue h-2 rounded-full" style={{ width: "90%" }}></div>
+                      <div className="bg-folk-blue h-2 rounded-full" style={{
+                      width: "90%"
+                    }}></div>
                     </div>
                   </div>
                   <div>
@@ -105,7 +104,9 @@ const Index = () => {
                       Graphic Design
                     </h4>
                     <div className="w-full bg-folk-cream-dark rounded-full h-2">
-                      <div className="bg-folk-orange h-2 rounded-full" style={{ width: "85%" }}></div>
+                      <div className="bg-folk-orange h-2 rounded-full" style={{
+                      width: "85%"
+                    }}></div>
                     </div>
                   </div>
                   <div>
@@ -114,7 +115,9 @@ const Index = () => {
                       Motion Graphics
                     </h4>
                     <div className="w-full bg-folk-cream-dark rounded-full h-2">
-                      <div className="bg-folk-green h-2 rounded-full" style={{ width: "80%" }}></div>
+                      <div className="bg-folk-green h-2 rounded-full" style={{
+                      width: "80%"
+                    }}></div>
                     </div>
                   </div>
                 </div>
@@ -134,11 +137,7 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Featured Project 1 */}
               <div className="group relative overflow-hidden rounded-lg portfolio-item gond-card">
-                <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-                  alt="Digital Campaign Project"
-                  className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Digital Campaign Project" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <span className="text-white/70 text-sm">Photography</span>
                   <h3 className="text-white text-xl font-bold">Urban Perspectives</h3>
@@ -150,11 +149,7 @@ const Index = () => {
               
               {/* Featured Project 2 */}
               <div className="group relative overflow-hidden rounded-lg portfolio-item gond-card">
-                <img
-                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
-                  alt="Brand Campaign"
-                  className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" alt="Brand Campaign" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <span className="text-white/70 text-sm">Video</span>
                   <h3 className="text-white text-xl font-bold">Product Launch</h3>
@@ -166,11 +161,7 @@ const Index = () => {
               
               {/* Featured Project 3 */}
               <div className="group relative overflow-hidden rounded-lg portfolio-item gond-card">
-                <img
-                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-                  alt="UI Design Project"
-                  className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="UI Design Project" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                   <span className="text-white/70 text-sm">Graphics</span>
                   <h3 className="text-white text-xl font-bold">Brand Identity</h3>
@@ -192,8 +183,6 @@ const Index = () => {
         </section>
       </main>
       <Footer />
-    </>
-  );
+    </>;
 };
-
 export default Index;
