@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
 import { toast } from "@/hooks/use-toast";
+import { FileUpload, Calendar, Link as LinkIcon, Save } from "lucide-react";
 
 interface ProjectFormProps {
   project?: ProjectData;
@@ -91,12 +92,13 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid gap-2">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">Project Title</Label>
         <Input
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Project Title"
+          className="border-folk-border"
           required
         />
       </div>
@@ -107,7 +109,7 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
           value={category}
           onValueChange={(value) => setCategory(value as "photos" | "videos" | "graphics")}
         >
-          <SelectTrigger>
+          <SelectTrigger className="border-folk-border">
             <SelectValue placeholder="Select category" />
           </SelectTrigger>
           <SelectContent>
@@ -126,57 +128,80 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Project Description"
           required
-          className="min-h-[120px]"
+          className="min-h-[120px] border-folk-border"
         />
       </div>
 
-      <div className="grid gap-2">
-        <Label htmlFor="date">Date</Label>
-        <Input
-          id="date"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid gap-2">
+          <Label htmlFor="date" className="flex items-center gap-2">
+            <Calendar size={14} />
+            Date
+          </Label>
+          <Input
+            id="date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="border-folk-border"
+            required
+          />
+        </div>
+
+        <div className="grid gap-2">
+          <Label htmlFor="projectUrl" className="flex items-center gap-2">
+            <LinkIcon size={14} />
+            Project URL (Optional)
+          </Label>
+          <Input
+            id="projectUrl"
+            type="url"
+            value={projectUrl}
+            onChange={(e) => setProjectUrl(e.target.value)}
+            placeholder="https://"
+            className="border-folk-border"
+          />
+        </div>
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="projectUrl">Project URL (Optional)</Label>
-        <Input
-          id="projectUrl"
-          type="url"
-          value={projectUrl}
-          onChange={(e) => setProjectUrl(e.target.value)}
-          placeholder="https://"
-        />
-      </div>
-
-      <div className="grid gap-2">
-        <Label htmlFor="image">Project Image</Label>
+        <Label htmlFor="image" className="flex items-center gap-2">
+          <FileUpload size={14} />
+          Project Image
+        </Label>
         <Input
           id="image"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="cursor-pointer"
+          className="cursor-pointer border-folk-border"
         />
         {imagePreview && (
-          <div className="mt-2">
+          <div className="mt-2 border border-folk-border rounded-md overflow-hidden">
             <img
               src={imagePreview}
               alt="Preview"
-              className="max-h-40 rounded-md border border-gray-300"
+              className="max-h-48 w-full object-cover"
             />
           </div>
         )}
       </div>
 
       <div className="flex justify-end space-x-2">
-        <Button type="button" variant="outline" onClick={onCancel}>
+        <Button 
+          type="button" 
+          variant="outline" 
+          onClick={onCancel}
+          className="border-folk-border"
+        >
           Cancel
         </Button>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button 
+          type="submit" 
+          disabled={isSubmitting}
+          className="bg-folk-purple hover:bg-folk-purple-dark flex items-center gap-2"
+        >
+          <Save size={16} />
           {isSubmitting ? "Saving..." : isEditing ? "Update Project" : "Add Project"}
         </Button>
       </div>

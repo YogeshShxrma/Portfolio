@@ -79,6 +79,28 @@ export default {
                     700: "#322554",
                     800: "#1A1F2C",
                     900: "#121420",
+                },
+                // Folk art theme based on the image
+                folk: {
+                    purple: "#7C64B5", // from the purple trees
+                    "purple-light": "#9A86D9",
+                    "purple-dark": "#584A82",
+                    blue: "#3E79A0", // from the blue bird
+                    "blue-light": "#68A9D3",
+                    "blue-dark": "#2A5670",
+                    orange: "#D49768", // from the orange elements
+                    "orange-light": "#F0B98E", 
+                    "orange-dark": "#A86F45",
+                    green: "#5DA87A", // from the green leaves
+                    "green-light": "#7FD19F",
+                    "green-dark": "#3E7154",
+                    cream: "#F2EFE6", // background color
+                    "cream-dark": "#E5DFD2",
+                    dark: "#2C261E", // dark text/elements
+                    text: "#383129",
+                    "text-light": "#786F64",
+                    border: "#D8D0C0",
+                    accent: "#D45B3F", // accent color from the small orange elements
                 }
 			},
 			borderRadius: {
@@ -109,11 +131,11 @@ export default {
                 },
                 'glow': {
                     '0%, 100%': { 
-                        boxShadow: '0 0 12px 2px rgba(155, 135, 245, 0.2)',
+                        boxShadow: '0 0 12px 2px rgba(124, 100, 181, 0.2)',
                         transform: 'scale(1)'
                     },
                     '50%': { 
-                        boxShadow: '0 0 20px 5px rgba(155, 135, 245, 0.4)', 
+                        boxShadow: '0 0 20px 5px rgba(124, 100, 181, 0.4)', 
                         transform: 'scale(1.01)'
                     }
                 }
@@ -128,4 +150,3 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
