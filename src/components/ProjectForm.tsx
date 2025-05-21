@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
 import { toast } from "@/hooks/use-toast";
-import { FileUpload, Calendar, Link as LinkIcon, Save } from "lucide-react";
+import { Upload, Calendar, Link as LinkIcon, Save } from "lucide-react";
 
 interface ProjectFormProps {
   project?: ProjectData;
@@ -166,7 +166,7 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
 
       <div className="grid gap-2">
         <Label htmlFor="image" className="flex items-center gap-2">
-          <FileUpload size={14} />
+          <Upload size={14} />
           Project Image
         </Label>
         <Input
@@ -210,3 +210,4 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
 };
 
 export default ProjectForm;
+
