@@ -14,13 +14,27 @@ import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
+// Get the basename from the repo name for GitHub Pages
+const getBasename = () => {
+  // When running locally, don't use a basename
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "/";
+  }
+  
+  // For GitHub Pages, use the repository name as the basename
+  // This assumes the site is published to https://username.github.io/repo-name/
+  const pathname = window.location.pathname;
+  const segments = pathname.split("/");
+  return segments.length > 1 ? `/${segments[1]}` : "/";
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename={getBasename()}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/portfolio" element={<Portfolio />} />
