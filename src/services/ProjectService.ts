@@ -1,3 +1,8 @@
+
+import { 
+  serverTimestamp,
+  Timestamp
+} from "firebase/firestore";
 import { supabase } from "@/integrations/supabase/client";
 
 export interface ProjectData {
@@ -8,6 +13,7 @@ export interface ProjectData {
   image: string;
   date: string;
   projectUrl?: string;
+  createdAt?: Timestamp;
 }
 
 export class ProjectService {
@@ -24,7 +30,7 @@ export class ProjectService {
         id: project.id,
         title: project.title,
         description: project.description,
-        category: project.category as "photos" | "videos" | "graphics",
+        category: project.category,
         image: project.image_url,
         date: project.date,
         projectUrl: project.project_url
@@ -54,7 +60,7 @@ export class ProjectService {
         id: data.id,
         title: data.title,
         description: data.description,
-        category: data.category as "photos" | "videos" | "graphics",
+        category: data.category,
         image: data.image_url,
         date: data.date,
         projectUrl: data.project_url
@@ -139,7 +145,7 @@ export class ProjectService {
           image_url: imageUrl,
           project_url: project.projectUrl || null,
           date: project.date,
-          updated_at: new Date().toISOString()
+          updated_at: new Date()
         })
         .eq('id', id);
       
