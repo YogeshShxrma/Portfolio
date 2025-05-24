@@ -25,8 +25,11 @@ const getBasename = () => {
   // This assumes the site is published to https://username.github.io/repo-name/
   const pathname = window.location.pathname;
   const segments = pathname.split("/");
-  return segments.length > 1 ? `/${segments[1]}` : "/";
+  // If there's a segment after the first slash, use that as the basename
+  return segments.length > 1 && segments[1] !== "" ? `/${segments[1]}` : "/";
 };
+
+console.log("Using basename:", getBasename());
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
