@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactInfo from "@/components/ContactInfo";
-import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram } from "lucide-react";
+import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram ,Mail} from "lucide-react";
 
 const Contact = () => {
   return (
@@ -50,6 +50,10 @@ const Contact = () => {
                     <li className="flex items-start">
                       <Phone className="mr-3 text-gray-600 flex-shrink-0 mt-1" size={18} />
                       <span>+91 8827087768</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Mail className="mr-3 text-gray-600 flex-shrink-0 mt-1" size={18} />
+                      <span>yogesh@gmail.com</span>
                     </li>
                     <li className="flex items-start">
                       <MapPin className="mr-3 text-gray-600 flex-shrink-0 mt-1" size={18} />
