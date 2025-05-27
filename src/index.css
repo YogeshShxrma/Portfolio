@@ -10,65 +10,50 @@
 
 @layer base {
   :root {
+    /* Light mode colors */
     --background: 36 30% 96%;
     --foreground: 36 15% 16%;
-
     --card: 0 0% 100%;
     --card-foreground: 36 15% 16%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 36 15% 16%;
-
     --primary: 259 41% 55%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 32 30% 90%;
     --secondary-foreground: 36 15% 16%;
-
     --muted: 32 30% 90%;
     --muted-foreground: 36 15% 40%;
-
     --accent: 15 67% 54%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 32 20% 83%;
     --input: 32 20% 83%;
     --ring: 259 41% 55%;
-
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 36 15% 12%;
-    --foreground: 36 30% 96%;
-
-    --card: 36 15% 16%;
-    --card-foreground: 36 30% 96%;
-
-    --popover: 36 15% 16%;
-    --popover-foreground: 36 30% 96%;
-
-    --primary: 259 41% 55%;
+    /* Dark mode colors */
+    --background: 224 20% 18%;
+    --foreground: 40 15% 88%;
+    --card: 224 25% 13%;
+    --card-foreground: 40 15% 88%;
+    --popover: 224 25% 13%;
+    --popover-foreground: 40 15% 88%;
+    --primary: 259 41% 65%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 36 15% 25%;
-    --secondary-foreground: 36 30% 96%;
-
-    --muted: 36 15% 25%;
-    --muted-foreground: 36 15% 65%;
-
-    --accent: 15 67% 54%;
+    --secondary: 224 20% 25%;
+    --secondary-foreground: 40 15% 88%;
+    --muted: 224 20% 25%;
+    --muted-foreground: 40 15% 65%;
+    --accent: 32 67% 64%;
     --accent-foreground: 0 0% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 36 15% 25%;
-    --input: 36 15% 25%;
-    --ring: 259 41% 55%;
+    --border: 224 20% 25%;
+    --input: 224 20% 25%;
+    --ring: 259 41% 65%;
   }
 }
 
@@ -78,26 +63,185 @@
   }
 
   body {
-    @apply bg-folk-cream text-folk-text font-raleway;
+    @apply font-raleway transition-colors duration-500;
+    background: theme('colors.gond.light.bg');
+    color: theme('colors.gond.light.text');
+  }
+
+  .dark body {
+    background: theme('colors.gond.dark.bg');
+    color: theme('colors.gond.dark.text');
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-montserrat font-medium tracking-tight text-folk-dark;
+    @apply font-montserrat font-medium tracking-tight transition-colors duration-500;
+    color: theme('colors.gond.light.text');
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: theme('colors.gond.dark.text');
   }
 }
 
-.portfolio-item {
-  @apply transition-all duration-300 hover:opacity-90;
+/* Gond Art Theme Utilities */
+@layer components {
+  .gond-bg {
+    @apply transition-all duration-500;
+    background: theme('colors.gond.light.bg');
+  }
+
+  .dark .gond-bg {
+    background: theme('colors.gond.dark.bg');
+  }
+
+  .gond-card {
+    @apply relative overflow-hidden rounded-lg shadow-sm transition-all duration-500 border;
+    background: theme('colors.gond.light.card');
+    border-color: theme('colors.gond.light.brown');
+  }
+
+  .dark .gond-card {
+    background: theme('colors.gond.dark.card');
+    border-color: theme('colors.gond.dark.brown');
+    box-shadow: 0 0 20px rgba(155, 126, 217, 0.1);
+  }
+
+  .gond-section {
+    @apply relative overflow-hidden transition-all duration-500;
+    background: theme('colors.gond.light.cream');
+  }
+
+  .dark .gond-section {
+    background: theme('colors.gond.dark.cream');
+  }
+
+  .gond-button {
+    @apply rounded-md px-4 py-2 font-medium transition-all duration-300 border-2;
+    background: theme('colors.gond.light.purple');
+    color: white;
+    border-color: theme('colors.gond.light.purple');
+  }
+
+  .gond-button:hover {
+    background: theme('colors.gond.light.purpleLight');
+    border-color: theme('colors.gond.light.purpleLight');
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(107, 78, 140, 0.3);
+  }
+
+  .dark .gond-button {
+    background: theme('colors.gond.dark.purple');
+    border-color: theme('colors.gond.dark.purple');
+  }
+
+  .dark .gond-button:hover {
+    background: theme('colors.gond.dark.purpleLight');
+    border-color: theme('colors.gond.dark.purpleLight');
+    box-shadow: 0 4px 20px rgba(155, 126, 217, 0.4);
+  }
+
+  .gond-text {
+    color: theme('colors.gond.light.text');
+    @apply transition-colors duration-500;
+  }
+
+  .dark .gond-text {
+    color: theme('colors.gond.dark.text');
+  }
+
+  .gond-text-light {
+    color: theme('colors.gond.light.textLight');
+    @apply transition-colors duration-500;
+  }
+
+  .dark .gond-text-light {
+    color: theme('colors.gond.dark.textLight');
+  }
+
+  /* Decorative border patterns */
+  .gond-border-decorative {
+    @apply relative;
+  }
+
+  .gond-border-decorative::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-1;
+    background: linear-gradient(90deg, 
+      theme('colors.gond.light.purple'), 
+      theme('colors.gond.light.orange'), 
+      theme('colors.gond.light.green'), 
+      theme('colors.gond.light.blue')
+    );
+    transition: all 0.5s ease;
+  }
+
+  .dark .gond-border-decorative::before {
+    background: linear-gradient(90deg, 
+      theme('colors.gond.dark.purple'), 
+      theme('colors.gond.dark.orange'), 
+      theme('colors.gond.dark.green'), 
+      theme('colors.gond.dark.blue')
+    );
+    box-shadow: 0 0 10px rgba(155, 126, 217, 0.5);
+  }
+
+  .gond-border-decorative::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-1;
+    background: linear-gradient(90deg, 
+      theme('colors.gond.light.blue'), 
+      theme('colors.gond.light.green'), 
+      theme('colors.gond.light.orange'), 
+      theme('colors.gond.light.purple')
+    );
+    transition: all 0.5s ease;
+  }
+
+  .dark .gond-border-decorative::after {
+    background: linear-gradient(90deg, 
+      theme('colors.gond.dark.blue'), 
+      theme('colors.gond.dark.green'), 
+      theme('colors.gond.dark.orange'), 
+      theme('colors.gond.dark.purple')
+    );
+    box-shadow: 0 0 10px rgba(232, 155, 71, 0.5);
+  }
 }
 
+/* Smooth transitions for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+/* Glow effects for dark mode */
+.dark .glow-element {
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* Portfolio item hover effects */
+.portfolio-item {
+  @apply transition-all duration-300;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px);
+}
+
+.dark .portfolio-item:hover {
+  box-shadow: 0 10px 30px rgba(155, 126, 217, 0.3);
+}
+
+/* Fade in animation */
 .fade-in {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -105,116 +249,20 @@
   }
 }
 
-/* Gond art inspired decorative elements */
-.gond-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zm-24.596 0l-5.485 6.485 1.414 1.414 7.9-7.9h-2.83zm16.97 0l-7.071 7.07 1.415 1.415 8.485-8.485h-2.829zm-9.9 0l-8.486 8.485 1.415 1.415 9.9-9.9h-2.83zm-1.414 0L29.9 11.544l1.414 1.414 9.9-9.9h-2.83zm-14.85 0l-9.9 9.9 1.415 1.414 11.314-11.314h-2.83zm10.275 0L2.928 14.542l1.414 1.414 15.728-15.728h-2.83zm38.343 0L28.544 29.9l1.414 1.414 25.2-25.2h-2.83zM1.414 0L0 1.414l56.97 56.97 1.414-1.414L1.414 0zM56.97 0l-56.97 56.97 1.414 1.414L58.385 1.414 56.97 0z' fill='%237c64b5' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+/* Custom scrollbar for dark mode */
+.dark::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Gond art inspired border patterns */
-.gond-border {
-  @apply border-folk-border rounded-lg p-6 bg-white shadow-md relative;
-  background-image: linear-gradient(to right, rgba(242, 239, 230, 0.9), white);
+.dark::-webkit-scrollbar-track {
+  background: theme('colors.gond.dark.bg');
 }
 
-.gond-border::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border: 2px solid;
-  border-image: repeating-linear-gradient(45deg, #7C64B5, #7C64B5 10px, transparent 10px, transparent 20px) 1;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 1;
+.dark::-webkit-scrollbar-thumb {
+  background: theme('colors.gond.dark.purple');
+  border-radius: 4px;
 }
 
-.gond-card {
-  @apply bg-white border border-folk-border rounded-md shadow-sm hover:shadow transition-all duration-300 relative overflow-hidden;
-}
-
-.gond-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #7C64B5, #D49768, #5DA87A, #3E79A0);
-}
-
-/* Gond art inspired decorative elements */
-.gond-tree {
-  position: relative;
-}
-
-.gond-tree::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -20px;
-  width: 40px;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='200' viewBox='0 0 40 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L25 40 L15 40 L20 80 L25 120 L15 120 L20 160 L15 200 L25 200 L30 160 L20 120 L30 80 L20 40 L30 0' stroke='%237C64B5' stroke-width='2' fill='none' stroke-dasharray='2,2'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  opacity: 0.2;
-}
-
-.gond-bird {
-  position: relative;
-}
-
-.gond-bird::after {
-  content: '';
-  position: absolute;
-  top: -30px;
-  right: -20px;
-  width: 60px;
-  height: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 20 Q20 10 30 20 Q40 30 50 20' stroke='%233E79A0' stroke-width='2' fill='none'/%3E%3Ccircle cx='10' cy='20' r='2' fill='%233E79A0'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  opacity: 0.3;
-}
-
-.folk-highlight {
-  @apply text-folk-purple font-medium;
-}
-
-.folk-button {
-  @apply bg-folk-purple hover:bg-folk-purple-dark text-white rounded-md px-4 py-2 transition-colors;
-}
-
-/* Gond art inspired patterns */
-.gond-dotted {
-  background-image: radial-gradient(#7C64B5 1px, transparent 1px);
-  background-size: 10px 10px;
-}
-
-.gond-section {
-  @apply relative overflow-hidden;
-}
-
-.gond-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #7C64B5, #D49768, #5DA87A, #3E79A0);
-}
-
-/* Gond art patterns */
-.gond-pattern-1 {
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q25 20 50 10 Q75 0 100 10' stroke='%237C64B5' stroke-width='1' fill='none' stroke-dasharray='2,2'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-}
-
-.gond-pattern-2 {
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='2' fill='%23D49768'/%3E%3C/svg%3E");
-}
-
-.gond-pattern-3 {
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='10' y='10' width='20' height='20' fill='none' stroke='%235DA87A' stroke-width='1' stroke-dasharray='2,2'/%3E%3C/svg%3E");
+.dark::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.gond.dark.purpleLight');
 }
