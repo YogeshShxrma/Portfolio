@@ -30,10 +30,10 @@ export class ProjectService {
         id: project.id,
         title: project.title,
         description: project.description,
-        category: project.category,
+        category: project.category as "photos" | "videos" | "graphics",
         image: project.image_url,
         date: project.date,
-        projectUrl: project.project_url
+        projectUrl: project.project_url || undefined
       }));
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -60,10 +60,10 @@ export class ProjectService {
         id: data.id,
         title: data.title,
         description: data.description,
-        category: data.category,
+        category: data.category as "photos" | "videos" | "graphics",
         image: data.image_url,
         date: data.date,
-        projectUrl: data.project_url
+        projectUrl: data.project_url || undefined
       };
     } catch (error) {
       console.error("Error fetching project:", error);
@@ -145,7 +145,7 @@ export class ProjectService {
           image_url: imageUrl,
           project_url: project.projectUrl || null,
           date: project.date,
-          updated_at: new Date()
+          updated_at: new Date().toISOString()
         })
         .eq('id', id);
       
