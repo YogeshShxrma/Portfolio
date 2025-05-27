@@ -3,12 +3,30 @@ import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useState, useEffect } from "react";
+import { ProjectData, ProjectService } from "@/services/ProjectService";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { GondTree, GondPeacock, GondHut, GondPots, GondDottedPattern } from "@/components/GondArtElements";
 
 const Index = () => {
   const { theme } = useTheme();
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectData[]>([]);
+
+  useEffect(() => {
+    fetchFeaturedProjects();
+  }, []);
+
+  const fetchFeaturedProjects = async () => {
+    try {
+      const allProjects = await ProjectService.getProjects();
+      // For now, we'll use the first 3 projects as featured
+      // In a real implementation, this would be stored in the database
+      setFeaturedProjects(allProjects.slice(0, 3));
+    } catch (error) {
+      console.error("Error fetching featured projects:", error);
+    }
+  };
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
@@ -148,9 +166,9 @@ const Index = () => {
                 <div className="space-y-4">
                   {[
                     { name: "Photography & Photo Editing", percentage: 95, color: "purple" },
-                    { name: "Videography & Video Editing", percentage: 90, color: "blue" },
-                    { name: "Graphic Design", percentage: 85, color: "orange" },
-                    { name: "Motion Graphics", percentage: 80, color: "green" }
+                    { name: "Videography & Video Editing", percentage: 90, color: "orange" },
+                    { name: "Graphic Design", percentage: 85, color: "green" },
+                    { name: "Motion Graphics", percentage: 80, color: "blue" }
                   ].map((skill, index) => (
                     <div key={index}>
                       <h4 className="font-medium mb-2 flex items-center gond-text">
@@ -158,8 +176,14 @@ const Index = () => {
                           className={`
                             inline-block w-2 h-2 mr-2 rounded-full transition-colors duration-500
                             ${theme === 'light' 
-                              ? `bg-gond-light-${skill.color}` 
-                              : `bg-gond-dark-${skill.color}`
+                              ? skill.color === 'purple' ? 'bg-gond-light-purple' :
+                                skill.color === 'orange' ? 'bg-gond-light-orange' :
+                                skill.color === 'green' ? 'bg-gond-light-green' :
+                                'bg-gond-light-blue'
+                              : skill.color === 'purple' ? 'bg-gond-dark-purple' :
+                                skill.color === 'orange' ? 'bg-gond-dark-orange' :
+                                skill.color === 'green' ? 'bg-gond-dark-green' :
+                                'bg-gond-dark-blue'
                             }
                           `}
                         />
@@ -173,8 +197,14 @@ const Index = () => {
                           className={`
                             h-2 rounded-full transition-all duration-1000 ease-out
                             ${theme === 'light' 
-                              ? `bg-gond-light-${skill.color}` 
-                              : `bg-gond-dark-${skill.color}`
+                              ? skill.color === 'purple' ? 'bg-gond-light-purple' :
+                                skill.color === 'orange' ? 'bg-gond-light-orange' :
+                                skill.color === 'green' ? 'bg-gond-light-green' :
+                                'bg-gond-light-blue'
+                              : skill.color === 'purple' ? 'bg-gond-dark-purple' :
+                                skill.color === 'orange' ? 'bg-gond-dark-orange' :
+                                skill.color === 'green' ? 'bg-gond-dark-green' :
+                                'bg-gond-dark-blue'
                             }
                           `}
                           style={{ width: `${skill.percentage}%` }}
@@ -210,51 +240,83 @@ const Index = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-              {[
-                { 
-                  image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158", 
-                  category: "Photography", 
-                  title: "Urban Perspectives",
-                  art: <GondTree className="w-8 h-12" />
-                },
-                { 
-                  image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d", 
-                  category: "Video", 
-                  title: "Product Launch",
-                  art: <GondPeacock className="w-12 h-8" />
-                },
-                { 
-                  image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085", 
-                  category: "Graphics", 
-                  title: "Brand Identity",
-                  art: <GondHut className="w-10 h-8" />
-                }
-              ].map((project, index) => (
-                <div key={index} className="group portfolio-item gond-card relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" 
-                  />
-                  
-                  <div className={`
-                    absolute inset-0 bg-gradient-to-t from-black/70 to-transparent 
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 
-                    flex flex-col justify-end p-6
-                  `}>
-                    <span className="text-white/70 text-sm">{project.category}</span>
-                    <h3 className="text-white text-xl font-bold">{project.title}</h3>
+              {featuredProjects.length > 0 ? (
+                featuredProjects.map((project, index) => (
+                  <div key={project.id} className="group portfolio-item gond-card relative overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
+                    
+                    <div className={`
+                      absolute inset-0 bg-gradient-to-t from-black/70 to-transparent 
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                      flex flex-col justify-end p-6
+                    `}>
+                      <span className="text-white/70 text-sm capitalize">{project.category}</span>
+                      <h3 className="text-white text-xl font-bold">{project.title}</h3>
+                    </div>
+                    
+                    {/* Gond art decorative element */}
+                    <div className={`
+                      absolute top-2 right-2 opacity-40 transition-opacity duration-300
+                      ${theme === 'dark' ? 'group-hover:opacity-80' : 'group-hover:opacity-60'}
+                    `}>
+                      {index === 0 && <GondTree className="w-8 h-12" />}
+                      {index === 1 && <GondPeacock className="w-12 h-8" />}
+                      {index === 2 && <GondHut className="w-10 h-8" />}
+                    </div>
                   </div>
-                  
-                  {/* Gond art decorative element */}
-                  <div className={`
-                    absolute top-2 right-2 opacity-40 transition-opacity duration-300
-                    ${theme === 'dark' ? 'group-hover:opacity-80' : 'group-hover:opacity-60'}
-                  `}>
-                    {project.art}
+                ))
+              ) : (
+                // Fallback to placeholder data if no featured projects
+                [
+                  { 
+                    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158", 
+                    category: "Photography", 
+                    title: "Urban Perspectives",
+                    art: <GondTree className="w-8 h-12" />
+                  },
+                  { 
+                    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d", 
+                    category: "Video", 
+                    title: "Product Launch",
+                    art: <GondPeacock className="w-12 h-8" />
+                  },
+                  { 
+                    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085", 
+                    category: "Graphics", 
+                    title: "Brand Identity",
+                    art: <GondHut className="w-10 h-8" />
+                  }
+                ].map((project, index) => (
+                  <div key={index} className="group portfolio-item gond-card relative overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
+                    
+                    <div className={`
+                      absolute inset-0 bg-gradient-to-t from-black/70 to-transparent 
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                      flex flex-col justify-end p-6
+                    `}>
+                      <span className="text-white/70 text-sm">{project.category}</span>
+                      <h3 className="text-white text-xl font-bold">{project.title}</h3>
+                    </div>
+                    
+                    {/* Gond art decorative element */}
+                    <div className={`
+                      absolute top-2 right-2 opacity-40 transition-opacity duration-300
+                      ${theme === 'dark' ? 'group-hover:opacity-80' : 'group-hover:opacity-60'}
+                    `}>
+                      {project.art}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
             
             <div className="mt-10 text-center relative z-10">
