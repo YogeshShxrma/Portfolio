@@ -1,8 +1,7 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram, Mail, Copy, ExternalLink } from "lucide-react";
+import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram, Mail } from "lucide-react";
 import { GondTree, GondPeacock, GondHut, GondDottedPattern } from "@/components/GondArtElements";
 import { useToast } from "@/hooks/use-toast";
 
@@ -118,10 +117,9 @@ const Contact = () => {
                       <div className="flex-1">
                         <button
                           onClick={() => copyToClipboard("+91 8827087768", "Phone number")}
-                          className="gond-text-light group-hover:gond-text transition-colors duration-300 flex items-center gap-2 hover:underline"
+                          className="gond-text-light group-hover:gond-text transition-colors duration-300 hover:underline"
                         >
                           +91 8827087768
-                          <Copy size={14} className="opacity-50 group-hover:opacity-100" />
                         </button>
                       </div>
                     </li>
@@ -139,10 +137,9 @@ const Contact = () => {
                       <div className="flex-1">
                         <button
                           onClick={() => copyToClipboard("yogesh@gmail.com", "Email address")}
-                          className="gond-text-light group-hover:gond-text transition-colors duration-300 flex items-center gap-2 hover:underline"
+                          className="gond-text-light group-hover:gond-text transition-colors duration-300 hover:underline"
                         >
                           yogesh@gmail.com
-                          <Copy size={14} className="opacity-50 group-hover:opacity-100" />
                         </button>
                       </div>
                     </li>
@@ -160,12 +157,11 @@ const Contact = () => {
                       <div className="flex-1">
                         <button
                           onClick={openMap}
-                          className="gond-text-light group-hover:gond-text transition-colors duration-300 flex items-center gap-2 hover:underline text-left"
+                          className="gond-text-light group-hover:gond-text transition-colors duration-300 hover:underline text-left"
                         >
                           Abhnpur, Raipur, Chhattisgarh
                           <br />
                           India
-                          <ExternalLink size={14} className="opacity-50 group-hover:opacity-100" />
                         </button>
                       </div>
                     </li>
