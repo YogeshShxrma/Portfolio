@@ -12,6 +12,7 @@ import { toast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AdminProjectCard from "@/components/AdminProjectCard";
 import AdminLogin from "@/components/AdminLogin";
+import FeaturedWorkSelector from "@/components/FeaturedWorkSelector";
 
 const Admin = () => {
   const [projects, setProjects] = useState<ProjectData[]>([]);
@@ -114,6 +115,7 @@ const Admin = () => {
               <TabsTrigger value="photos">Photos</TabsTrigger>
               <TabsTrigger value="videos">Videos</TabsTrigger>
               <TabsTrigger value="graphics">Graphics</TabsTrigger>
+              <TabsTrigger value="featured">Featured Work</TabsTrigger>
             </TabsList>
             
             <TabsContent value="all">
@@ -204,6 +206,10 @@ const Admin = () => {
                   </div>
                 )}
               </div>
+            </TabsContent>
+
+            <TabsContent value="featured">
+              <FeaturedWorkSelector onUpdate={fetchProjects} />
             </TabsContent>
           </Tabs>
         </div>

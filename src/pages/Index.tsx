@@ -30,7 +30,7 @@ const Index = () => {
           <div className="container mx-auto max-w-5xl pt-20 relative z-10">
             <span className={`
               font-medium mb-4 block transition-colors duration-500
-              ${theme === 'light' ? 'text-gond-light-orange' : 'text-gond-dark-orange animate-glow-orange'}
+              ${theme === 'light' ? 'text-gond-light-orange' : 'text-gond-dark-orange'}
             `}>
               Visual Storyteller
             </span>
@@ -39,7 +39,7 @@ const Index = () => {
               Bringing ideas to life through{" "}
               <span className={`
                 transition-colors duration-500
-                ${theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple animate-glow-slow'}
+                ${theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple'}
               `}>
                 visual creativity
               </span>{" "}
@@ -90,7 +90,6 @@ const Index = () => {
               onClick={scrollToAbout} 
               className={`
                 gond-text-light hover:gond-text transition-all duration-300 flex flex-col items-center group
-                ${theme === 'dark' ? 'hover:animate-glow-slow' : ''}
               `}
             >
               <span className="mb-2 text-sm">Learn More</span>
@@ -177,7 +176,6 @@ const Index = () => {
                               ? `bg-gond-light-${skill.color}` 
                               : `bg-gond-dark-${skill.color}`
                             }
-                            ${theme === 'dark' ? 'animate-glow-slow' : ''}
                           `}
                           style={{ width: `${skill.percentage}%` }}
                         />
