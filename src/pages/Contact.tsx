@@ -2,11 +2,36 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram, Mail } from "lucide-react";
+import { Linkedin, Phone, MapPin, Camera, Film, Palette, Instagram, Mail, Copy, ExternalLink } from "lucide-react";
 import { GondTree, GondPeacock, GondHut, GondDottedPattern } from "@/components/GondArtElements";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { theme } = useTheme();
+  const { toast } = useToast();
+
+  const copyToClipboard = async (text: string, type: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({
+        title: "Copied!",
+        description: `${type} copied to clipboard`,
+      });
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      toast({
+        title: "Copy failed",
+        description: "Please try again",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const openMap = () => {
+    const address = "Abhnpur, Raipur, Chhattisgarh, India";
+    const encodedAddress = encodeURIComponent(address);
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+  };
 
   return (
     <>
@@ -80,26 +105,70 @@ const Contact = () => {
                   
                   <h2 className="text-xl font-bold mb-4 gond-text">Contact Information</h2>
                   <ul className="space-y-4">
-                    {[
-                      { icon: Phone, text: "+91 8827087768", color: "green" },
-                      { icon: Mail, text: "yogesh@gmail.com", color: "blue" },
-                      { icon: MapPin, text: "Raipur, Chhattisgarh\nIndia", color: "orange" }
-                    ].map((contact, index) => (
-                      <li key={index} className="flex items-start group">
-                        <div className={`
-                          mr-3 flex-shrink-0 mt-1 p-1 rounded transition-colors duration-300
-                          ${theme === 'light' 
-                            ? `text-gond-light-${contact.color}` 
-                            : `text-gond-dark-${contact.color}`
-                          }
-                        `}>
-                          <contact.icon size={18} />
-                        </div>
-                        <span className="gond-text-light group-hover:gond-text transition-colors duration-300">
-                          {contact.text}
-                        </span>
-                      </li>
-                    ))}
+                    <li className="flex items-start group">
+                      <div className={`
+                        mr-3 flex-shrink-0 mt-1 p-1 rounded transition-colors duration-300
+                        ${theme === 'light' 
+                          ? 'text-gond-light-green' 
+                          : 'text-gond-dark-green'
+                        }
+                      `}>
+                        <Phone size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <button
+                          onClick={() => copyToClipboard("+91 8827087768", "Phone number")}
+                          className="gond-text-light group-hover:gond-text transition-colors duration-300 flex items-center gap-2 hover:underline"
+                        >
+                          +91 8827087768
+                          <Copy size={14} className="opacity-50 group-hover:opacity-100" />
+                        </button>
+                      </div>
+                    </li>
+                    
+                    <li className="flex items-start group">
+                      <div className={`
+                        mr-3 flex-shrink-0 mt-1 p-1 rounded transition-colors duration-300
+                        ${theme === 'light' 
+                          ? 'text-gond-light-blue' 
+                          : 'text-gond-dark-blue'
+                        }
+                      `}>
+                        <Mail size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <button
+                          onClick={() => copyToClipboard("yogesh@gmail.com", "Email address")}
+                          className="gond-text-light group-hover:gond-text transition-colors duration-300 flex items-center gap-2 hover:underline"
+                        >
+                          yogesh@gmail.com
+                          <Copy size={14} className="opacity-50 group-hover:opacity-100" />
+                        </button>
+                      </div>
+                    </li>
+                    
+                    <li className="flex items-start group">
+                      <div className={`
+                        mr-3 flex-shrink-0 mt-1 p-1 rounded transition-colors duration-300
+                        ${theme === 'light' 
+                          ? 'text-gond-light-orange' 
+                          : 'text-gond-dark-orange'
+                        }
+                      `}>
+                        <MapPin size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <button
+                          onClick={openMap}
+                          className="gond-text-light group-hover:gond-text transition-colors duration-300 flex items-center gap-2 hover:underline text-left"
+                        >
+                          Abhnpur, Raipur, Chhattisgarh
+                          <br />
+                          India
+                          <ExternalLink size={14} className="opacity-50 group-hover:opacity-100" />
+                        </button>
+                      </div>
+                    </li>
                   </ul>
                 </div>
 
