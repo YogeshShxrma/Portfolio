@@ -159,7 +159,7 @@ const Contact = () => {
                           onClick={openMap}
                           className="gond-text-light group-hover:gond-text transition-colors duration-300 hover:underline text-left"
                         >
-                          Abhnpur, Raipur, Chhattisgarh
+                          Abhanpur, Raipur, Chhattisgarh
                           <br />
                           India
                         </button>
