@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -106,18 +107,20 @@ const AdminProjectCard = ({ project, onUpdate }: AdminProjectCardProps) => {
 
       {/* Edit Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="sm:max-w-xl">
+        <DialogContent className="sm:max-w-xl max-h-[90vh] flex flex-col">
           <DialogHeader>
             <DialogTitle>Edit Project</DialogTitle>
           </DialogHeader>
-          <ProjectForm
-            project={project}
-            onComplete={() => {
-              setIsEditDialogOpen(false);
-              onUpdate();
-            }}
-            onCancel={() => setIsEditDialogOpen(false)}
-          />
+          <ScrollArea className="flex-1 pr-6">
+            <ProjectForm
+              project={project}
+              onComplete={() => {
+                setIsEditDialogOpen(false);
+                onUpdate();
+              }}
+              onCancel={() => setIsEditDialogOpen(false)}
+            />
+          </ScrollArea>
         </DialogContent>
       </Dialog>
 
