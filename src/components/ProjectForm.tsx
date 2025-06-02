@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
 import { toast } from "@/hooks/use-toast";
-import { Upload, Calendar, Link as LinkIcon, Save } from "lucide-react";
+import { Upload, Calendar, Link as LinkIcon, Save, Image } from "lucide-react";
 
 interface ProjectFormProps {
   project?: ProjectData;
@@ -31,6 +31,8 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
   const [projectUrl, setProjectUrl] = useState(project?.projectUrl || "");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(project?.image || null);
+  const [thumbnail, setThumbnail] = useState<File | null>(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(project?.thumbnail || null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isEditing = !!project?.id;
@@ -63,6 +65,40 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
     }
   };
 
+  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      
+      // Only allow images for thumbnails
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload an image file for the thumbnail",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      setThumbnail(file);
+      
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setThumbnailPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const isVideoFile = (file: File | null) => {
+    return file?.type?.startsWith('video/') || false;
+  };
+
+  const isVideoUrl = (url: string | null) => {
+    if (!url) return false;
+    return url.includes('.mp4') || url.includes('.mov') || url.includes('.webm') || url.includes('.avi');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -73,18 +109,19 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
         description,
         category,
         image: imagePreview || "",
+        thumbnail: thumbnailPreview || "",
         date,
         projectUrl,
       };
 
       if (isEditing && project?.id) {
-        await ProjectService.updateProject(project.id, projectData, image);
+        await ProjectService.updateProject(project.id, projectData, image, thumbnail);
         toast({
           title: "Project updated",
           description: "Your project has been successfully updated.",
         });
       } else {
-        await ProjectService.createProject(projectData, image);
+        await ProjectService.createProject(projectData, image, thumbnail);
         toast({
           title: "Project created",
           description: "Your new project has been added to your portfolio.",
@@ -102,6 +139,8 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
       setIsSubmitting(false);
     }
   };
+
+  const showThumbnailField = category === 'videos' && (isVideoFile(image) || isVideoUrl(imagePreview));
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -192,7 +231,7 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
         />
         {imagePreview && (
           <div className="mt-2 border border-folk-border rounded-md overflow-hidden">
-            {image?.type?.startsWith('video/') || imagePreview.startsWith('data:video/') ? (
+            {isVideoFile(image) || isVideoUrl(imagePreview) ? (
               <video
                 src={imagePreview}
                 controls
@@ -208,6 +247,34 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
           </div>
         )}
       </div>
+
+      {showThumbnailField && (
+        <div className="grid gap-2">
+          <Label htmlFor="thumbnail" className="flex items-center gap-2">
+            <Image size={14} />
+            Video Thumbnail (Optional)
+          </Label>
+          <Input
+            id="thumbnail"
+            type="file"
+            accept="image/*"
+            onChange={handleThumbnailChange}
+            className="cursor-pointer border-folk-border"
+          />
+          <p className="text-sm text-gray-500">
+            Upload a custom thumbnail image for your video. If not provided, the video will be used as preview.
+          </p>
+          {thumbnailPreview && (
+            <div className="mt-2 border border-folk-border rounded-md overflow-hidden">
+              <img
+                src={thumbnailPreview}
+                alt="Thumbnail Preview"
+                className="max-h-32 w-full object-cover"
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="flex justify-end space-x-2">
         <Button 

@@ -1,4 +1,3 @@
-
 import { 
   serverTimestamp,
   Timestamp
@@ -11,6 +10,7 @@ export interface ProjectData {
   description: string;
   category: "photos" | "videos" | "graphics";
   image: string;
+  thumbnail?: string;
   date: string;
   projectUrl?: string;
   featured?: boolean;
@@ -33,6 +33,7 @@ export class ProjectService {
         description: project.description,
         category: project.category as "photos" | "videos" | "graphics",
         image: project.image_url,
+        thumbnail: project.thumbnail_url || undefined,
         date: project.date,
         projectUrl: project.project_url || undefined,
         featured: project.featured || false
@@ -60,6 +61,7 @@ export class ProjectService {
         description: project.description,
         category: project.category as "photos" | "videos" | "graphics",
         image: project.image_url,
+        thumbnail: project.thumbnail_url || undefined,
         date: project.date,
         projectUrl: project.project_url || undefined,
         featured: project.featured || false
@@ -105,6 +107,7 @@ export class ProjectService {
         description: data.description,
         category: data.category as "photos" | "videos" | "graphics",
         image: data.image_url,
+        thumbnail: data.thumbnail_url || undefined,
         date: data.date,
         projectUrl: data.project_url || undefined,
         featured: data.featured || false
@@ -115,9 +118,10 @@ export class ProjectService {
     }
   }
 
-  static async createProject(project: ProjectData, imageFile: File | null): Promise<string> {
+  static async createProject(project: ProjectData, imageFile: File | null, thumbnailFile?: File | null): Promise<string> {
     try {
       let imageUrl = project.image;
+      let thumbnailUrl = project.thumbnail;
       
       // Upload image if provided
       if (imageFile) {
@@ -136,6 +140,23 @@ export class ProjectService {
         imageUrl = data.publicUrl;
       }
       
+      // Upload thumbnail if provided
+      if (thumbnailFile) {
+        const thumbPath = `thumbnails/${Date.now()}_${thumbnailFile.name}`;
+        const { data: thumbUploadData, error: thumbUploadError } = await supabase.storage
+          .from('project-images')
+          .upload(thumbPath, thumbnailFile);
+        
+        if (thumbUploadError) throw thumbUploadError;
+        
+        // Get public URL
+        const { data } = supabase.storage
+          .from('project-images')
+          .getPublicUrl(thumbPath);
+          
+        thumbnailUrl = data.publicUrl;
+      }
+      
       // Add document to Supabase
       const { data, error } = await supabase
         .from('projects')
@@ -144,6 +165,7 @@ export class ProjectService {
           description: project.description,
           category: project.category,
           image_url: imageUrl,
+          thumbnail_url: thumbnailUrl || null,
           project_url: project.projectUrl || null,
           date: project.date,
           featured: project.featured || false
@@ -159,9 +181,10 @@ export class ProjectService {
     }
   }
 
-  static async updateProject(id: string, project: ProjectData, imageFile: File | null): Promise<void> {
+  static async updateProject(id: string, project: ProjectData, imageFile: File | null, thumbnailFile?: File | null): Promise<void> {
     try {
       let imageUrl = project.image;
+      let thumbnailUrl = project.thumbnail;
       
       // Upload new image if provided
       if (imageFile) {
@@ -180,6 +203,23 @@ export class ProjectService {
         imageUrl = data.publicUrl;
       }
       
+      // Upload new thumbnail if provided
+      if (thumbnailFile) {
+        const thumbPath = `thumbnails/${Date.now()}_${thumbnailFile.name}`;
+        const { data: thumbUploadData, error: thumbUploadError } = await supabase.storage
+          .from('project-images')
+          .upload(thumbPath, thumbnailFile);
+        
+        if (thumbUploadError) throw thumbUploadError;
+        
+        // Get public URL
+        const { data } = supabase.storage
+          .from('project-images')
+          .getPublicUrl(thumbPath);
+          
+        thumbnailUrl = data.publicUrl;
+      }
+      
       // Update document in Supabase
       const { error } = await supabase
         .from('projects')
@@ -188,6 +228,7 @@ export class ProjectService {
           description: project.description,
           category: project.category,
           image_url: imageUrl,
+          thumbnail_url: thumbnailUrl || null,
           project_url: project.projectUrl || null,
           date: project.date,
           featured: project.featured || false,

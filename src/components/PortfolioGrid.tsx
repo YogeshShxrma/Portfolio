@@ -38,6 +38,10 @@ const PortfolioGrid = ({ category }: PortfolioGridProps) => {
     ? items
     : items.filter(item => item.category === category);
 
+  const isVideoFile = (url: string) => {
+    return url.includes('.mp4') || url.includes('.mov') || url.includes('.webm') || url.includes('.avi');
+  };
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -71,11 +75,32 @@ const PortfolioGrid = ({ category }: PortfolioGridProps) => {
         <div key={item.id} className="group relative overflow-hidden rounded-lg folk-card portfolio-item">
           <Link to={`/portfolio/${item.id}`} className="block h-full">
             <div className="relative">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              {item.category === 'videos' && isVideoFile(item.image) ? (
+                <video
+                  src={item.image}
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                  muted
+                  loop
+                  playsInline
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.pause();
+                    e.currentTarget.currentTime = 0;
+                  }}
+                />
+              ) : item.thumbnail ? (
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              )}
               <Badge 
                 className="absolute top-3 left-3 bg-folk-purple/80 hover:bg-folk-purple capitalize"
               >

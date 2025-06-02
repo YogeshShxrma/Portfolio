@@ -72,6 +72,10 @@ export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) =>
     }
   };
 
+  const isVideoFile = (url: string) => {
+    return url.includes('.mp4') || url.includes('.mov') || url.includes('.webm') || url.includes('.avi');
+  };
+
   if (loading) {
     return <div className="text-center py-8">Loading projects...</div>;
   }
@@ -105,20 +109,31 @@ export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) =>
               )}
               
               <CardContent className="p-0">
-                {project.image && (
-                  project.category === 'videos' && (project.image.includes('video') || project.image.includes('.mp4') || project.image.includes('.mov')) ? (
+                {project.category === 'videos' && isVideoFile(project.image) ? (
+                  project.thumbnail ? (
+                    <img
+                      src={project.thumbnail}
+                      alt={`${project.title} thumbnail`}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  ) : (
                     <video
                       src={project.image}
                       className="w-full h-48 object-cover rounded-t-lg"
                       muted
-                    />
-                  ) : (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
+                      onMouseEnter={(e) => e.currentTarget.play()}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.pause();
+                        e.currentTarget.currentTime = 0;
+                      }}
                     />
                   )
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
                 )}
                 
                 <div className="p-4">

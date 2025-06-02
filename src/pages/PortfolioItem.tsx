@@ -53,6 +53,10 @@ const PortfolioItem = () => {
     }
   };
 
+  const isVideoFile = (url: string) => {
+    return url.includes('.mp4') || url.includes('.mov') || url.includes('.webm') || url.includes('.avi');
+  };
+
   if (loading) {
     return (
       <>
@@ -136,11 +140,20 @@ const PortfolioItem = () => {
             </div>
             
             <div className="mb-8">
-              <img 
-                src={item.image} 
-                alt={item.title}
-                className="w-full h-auto rounded-lg shadow-md"
-              />
+              {item.category === 'videos' && isVideoFile(item.image) ? (
+                <video 
+                  src={item.image} 
+                  controls
+                  className="w-full h-auto rounded-lg shadow-md"
+                  poster={item.thumbnail}
+                />
+              ) : (
+                <img 
+                  src={item.image} 
+                  alt={item.title}
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+              )}
             </div>
             
             <div className="prose prose-lg max-w-none">
