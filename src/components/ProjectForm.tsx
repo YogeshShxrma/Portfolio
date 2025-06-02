@@ -38,6 +38,20 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      
+      // Check file type - allow images and videos
+      const allowedTypes = ['image/', 'video/'];
+      const isValidType = allowedTypes.some(type => file.type.startsWith(type));
+      
+      if (!isValidType) {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload an image or video file",
+          variant: "destructive",
+        });
+        return;
+      }
+      
       setImage(file);
       
       // Create preview URL
@@ -167,22 +181,30 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
       <div className="grid gap-2">
         <Label htmlFor="image" className="flex items-center gap-2">
           <Upload size={14} />
-          Project Image
+          Project Media (Image or Video)
         </Label>
         <Input
           id="image"
           type="file"
-          accept="image/*"
+          accept="image/*,video/*"
           onChange={handleImageChange}
           className="cursor-pointer border-folk-border"
         />
         {imagePreview && (
           <div className="mt-2 border border-folk-border rounded-md overflow-hidden">
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="max-h-48 w-full object-cover"
-            />
+            {image?.type?.startsWith('video/') || imagePreview.startsWith('data:video/') ? (
+              <video
+                src={imagePreview}
+                controls
+                className="max-h-48 w-full object-cover"
+              />
+            ) : (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="max-h-48 w-full object-cover"
+              />
+            )}
           </div>
         )}
       </div>
@@ -210,4 +232,3 @@ export const ProjectForm = ({ project, onComplete, onCancel }: ProjectFormProps)
 };
 
 export default ProjectForm;
-

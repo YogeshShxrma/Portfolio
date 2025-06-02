@@ -19,10 +19,8 @@ const Index = () => {
 
   const fetchFeaturedProjects = async () => {
     try {
-      const allProjects = await ProjectService.getProjects();
-      // For now, we'll use the first 3 projects as featured
-      // In a real implementation, this would be stored in the database
-      setFeaturedProjects(allProjects.slice(0, 3));
+      const featured = await ProjectService.getFeaturedProjects();
+      setFeaturedProjects(featured);
     } catch (error) {
       console.error("Error fetching featured projects:", error);
     }
@@ -243,11 +241,21 @@ const Index = () => {
               {featuredProjects.length > 0 ? (
                 featuredProjects.map((project, index) => (
                   <div key={project.id} className="group portfolio-item gond-card relative overflow-hidden">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" 
-                    />
+                    {project.category === 'videos' && (project.image.includes('video') || project.image.includes('.mp4') || project.image.includes('.mov')) ? (
+                      <video 
+                        src={project.image} 
+                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                        muted
+                        onMouseEnter={(e) => e.currentTarget.play()}
+                        onMouseLeave={(e) => e.currentTarget.pause()}
+                      />
+                    ) : (
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" 
+                      />
+                    )}
                     
                     <div className={`
                       absolute inset-0 bg-gradient-to-t from-black/70 to-transparent 

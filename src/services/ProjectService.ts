@@ -13,6 +13,7 @@ export interface ProjectData {
   image: string;
   date: string;
   projectUrl?: string;
+  featured?: boolean;
   createdAt?: Timestamp;
 }
 
@@ -33,10 +34,52 @@ export class ProjectService {
         category: project.category as "photos" | "videos" | "graphics",
         image: project.image_url,
         date: project.date,
-        projectUrl: project.project_url || undefined
+        projectUrl: project.project_url || undefined,
+        featured: project.featured || false
       }));
     } catch (error) {
       console.error("Error fetching projects:", error);
+      throw error;
+    }
+  }
+
+  static async getFeaturedProjects(): Promise<ProjectData[]> {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('featured', true)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      
+      return data.map(project => ({
+        id: project.id,
+        title: project.title,
+        description: project.description,
+        category: project.category as "photos" | "videos" | "graphics",
+        image: project.image_url,
+        date: project.date,
+        projectUrl: project.project_url || undefined,
+        featured: project.featured || false
+      }));
+    } catch (error) {
+      console.error("Error fetching featured projects:", error);
+      throw error;
+    }
+  }
+
+  static async updateFeaturedStatus(id: string, featured: boolean): Promise<void> {
+    try {
+      const { error } = await supabase
+        .from('projects')
+        .update({ featured })
+        .eq('id', id);
+      
+      if (error) throw error;
+    } catch (error) {
+      console.error("Error updating featured status:", error);
       throw error;
     }
   }
@@ -63,7 +106,8 @@ export class ProjectService {
         category: data.category as "photos" | "videos" | "graphics",
         image: data.image_url,
         date: data.date,
-        projectUrl: data.project_url || undefined
+        projectUrl: data.project_url || undefined,
+        featured: data.featured || false
       };
     } catch (error) {
       console.error("Error fetching project:", error);
@@ -101,7 +145,8 @@ export class ProjectService {
           category: project.category,
           image_url: imageUrl,
           project_url: project.projectUrl || null,
-          date: project.date
+          date: project.date,
+          featured: project.featured || false
         }])
         .select();
       
@@ -145,6 +190,7 @@ export class ProjectService {
           image_url: imageUrl,
           project_url: project.projectUrl || null,
           date: project.date,
+          featured: project.featured || false,
           updated_at: new Date().toISOString()
         })
         .eq('id', id);

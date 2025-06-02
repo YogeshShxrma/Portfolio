@@ -13,7 +13,6 @@ interface FeaturedWorkSelectorProps {
 
 export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) => {
   const [projects, setProjects] = useState<ProjectData[]>([]);
-  const [featuredProjects, setFeaturedProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,10 +23,6 @@ export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) =>
     try {
       const allProjects = await ProjectService.getProjects();
       setProjects(allProjects);
-      
-      // For now, we'll use the first 3 projects as featured
-      // In a real implementation, this would be stored in the database
-      setFeaturedProjects(allProjects.slice(0, 3));
     } catch (error) {
       console.error("Error fetching projects:", error);
       toast({
@@ -40,29 +35,39 @@ export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) =>
     }
   };
 
-  const toggleFeatured = (project: ProjectData) => {
-    const isFeatured = featuredProjects.some(fp => fp.id === project.id);
+  const toggleFeatured = async (project: ProjectData) => {
+    const isFeatured = project.featured;
+    const featuredCount = projects.filter(p => p.featured).length;
     
-    if (isFeatured) {
-      setFeaturedProjects(featuredProjects.filter(fp => fp.id !== project.id));
+    if (!isFeatured && featuredCount >= 3) {
       toast({
-        title: "Removed from featured",
-        description: `${project.title} has been removed from featured work`,
+        title: "Maximum reached",
+        description: "You can only feature up to 3 projects",
+        variant: "destructive",
       });
-    } else {
-      if (featuredProjects.length >= 3) {
-        toast({
-          title: "Maximum reached",
-          description: "You can only feature up to 3 projects",
-          variant: "destructive",
-        });
-        return;
-      }
+      return;
+    }
+
+    try {
+      await ProjectService.updateFeaturedStatus(project.id!, !isFeatured);
       
-      setFeaturedProjects([...featuredProjects, project]);
+      // Update local state
+      setProjects(projects.map(p => 
+        p.id === project.id ? { ...p, featured: !isFeatured } : p
+      ));
+
       toast({
-        title: "Added to featured",
-        description: `${project.title} has been added to featured work`,
+        title: isFeatured ? "Removed from featured" : "Added to featured",
+        description: `${project.title} has been ${isFeatured ? 'removed from' : 'added to'} featured work`,
+      });
+
+      onUpdate();
+    } catch (error) {
+      console.error("Error updating featured status:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update featured status",
+        variant: "destructive",
       });
     }
   };
@@ -71,18 +76,20 @@ export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) =>
     return <div className="text-center py-8">Loading projects...</div>;
   }
 
+  const featuredCount = projects.filter(p => p.featured).length;
+
   return (
     <div className="space-y-6">
       <div className="text-center">
         <h3 className="text-2xl font-bold mb-2">Featured Work Selection</h3>
         <p className="text-muted-foreground">
-          Select up to 3 projects to feature on the home page ({featuredProjects.length}/3 selected)
+          Select up to 3 projects to feature on the home page ({featuredCount}/3 selected)
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((project) => {
-          const isFeatured = featuredProjects.some(fp => fp.id === project.id);
+          const isFeatured = project.featured;
           
           return (
             <Card key={project.id} className={`relative cursor-pointer transition-all duration-200 ${
@@ -98,11 +105,21 @@ export const FeaturedWorkSelector = ({ onUpdate }: FeaturedWorkSelectorProps) =>
               )}
               
               <CardContent className="p-0">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
+                {project.image && (
+                  project.category === 'videos' && (project.image.includes('video') || project.image.includes('.mp4') || project.image.includes('.mov')) ? (
+                    <video
+                      src={project.image}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                      muted
+                    />
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  )
+                )}
                 
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-2">
