@@ -33,7 +33,7 @@ export class ProjectService {
         description: project.description,
         category: project.category as "photos" | "videos" | "graphics",
         image: project.image_url,
-        thumbnail: project.thumbnail_url || undefined,
+        thumbnail: (project as any).thumbnail_url || undefined,
         date: project.date,
         projectUrl: project.project_url || undefined,
         featured: project.featured || false
@@ -61,7 +61,7 @@ export class ProjectService {
         description: project.description,
         category: project.category as "photos" | "videos" | "graphics",
         image: project.image_url,
-        thumbnail: project.thumbnail_url || undefined,
+        thumbnail: (project as any).thumbnail_url || undefined,
         date: project.date,
         projectUrl: project.project_url || undefined,
         featured: project.featured || false
@@ -107,7 +107,7 @@ export class ProjectService {
         description: data.description,
         category: data.category as "photos" | "videos" | "graphics",
         image: data.image_url,
-        thumbnail: data.thumbnail_url || undefined,
+        thumbnail: (data as any).thumbnail_url || undefined,
         date: data.date,
         projectUrl: data.project_url || undefined,
         featured: data.featured || false
