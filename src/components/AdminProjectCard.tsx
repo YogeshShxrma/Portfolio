@@ -3,62 +3,46 @@ import { Link } from "react-router-dom";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { ProjectForm } from "@/components/ProjectForm";
 import { toast } from "@/hooks/use-toast";
 import { Calendar, Edit, Trash, ExternalLink } from "lucide-react";
-
 interface AdminProjectCardProps {
   project: ProjectData;
   onUpdate: () => void;
 }
-
-const AdminProjectCard = ({ project, onUpdate }: AdminProjectCardProps) => {
+const AdminProjectCard = ({
+  project,
+  onUpdate
+}: AdminProjectCardProps) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-
   const handleDelete = async () => {
     if (!project.id) return;
-    
     setIsDeleting(true);
     try {
       await ProjectService.deleteProject(project.id, project.image);
       toast({
         title: "Project deleted",
-        description: "The project has been successfully removed.",
+        description: "The project has been successfully removed."
       });
       onUpdate();
     } catch (error: any) {
       toast({
         title: "Error deleting project",
         description: error.message || "There was an error deleting the project.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsDeleting(false);
       setIsDeleteDialogOpen(false);
     }
   };
-
-  return (
-    <div className="relative group bg-white dark:bg-folk-dark border border-folk-border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all">
+  return <div className="relative group bg-white dark:bg-folk-dark border border-folk-border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all">
       <div className="relative aspect-video">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
+        <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
       
@@ -84,20 +68,10 @@ const AdminProjectCard = ({ project, onUpdate }: AdminProjectCardProps) => {
           </Link>
           
           <div className="space-x-2">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="text-folk-purple hover:text-folk-purple-dark"
-              onClick={() => setIsEditDialogOpen(true)}
-            >
+            <Button variant="outline" size="sm" className="text-folk-purple hover:text-folk-purple-dark" onClick={() => setIsEditDialogOpen(true)}>
               <Edit size={14} />
             </Button>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="text-red-500 hover:text-red-700"
-              onClick={() => setIsDeleteDialogOpen(true)}
-            >
+            <Button variant="outline" size="sm" className="text-red-500 hover:text-red-700" onClick={() => setIsDeleteDialogOpen(true)}>
               <Trash size={14} />
             </Button>
           </div>
@@ -112,16 +86,12 @@ const AdminProjectCard = ({ project, onUpdate }: AdminProjectCardProps) => {
               <DialogTitle>Edit Project</DialogTitle>
             </DialogHeader>
           </div>
-          <ScrollArea className="max-h-[calc(85vh-80px)] px-6">
+          <ScrollArea className="max-h-[calc(85vh-95px)] px-6">
             <div className="py-4">
-              <ProjectForm
-                project={project}
-                onComplete={() => {
-                  setIsEditDialogOpen(false);
-                  onUpdate();
-                }}
-                onCancel={() => setIsEditDialogOpen(false)}
-              />
+              <ProjectForm project={project} onComplete={() => {
+              setIsEditDialogOpen(false);
+              onUpdate();
+            }} onCancel={() => setIsEditDialogOpen(false)} />
             </div>
           </ScrollArea>
         </DialogContent>
@@ -139,18 +109,12 @@ const AdminProjectCard = ({ project, onUpdate }: AdminProjectCardProps) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              disabled={isDeleting}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-red-600 hover:bg-red-700">
               {isDeleting ? "Deleting..." : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
-  );
+    </div>;
 };
-
 export default AdminProjectCard;
