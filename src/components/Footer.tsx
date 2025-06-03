@@ -1,19 +1,14 @@
-
 import { Linkedin, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
-
 const Footer = () => {
-  const { theme } = useTheme();
+  const {
+    theme
+  } = useTheme();
   const currentYear = new Date().getFullYear();
-  
-  return (
-    <footer className={`
+  return <footer className={`
       relative transition-all duration-500 border-t-2
-      ${theme === 'light' 
-        ? 'bg-gond-light-cream text-gond-light-text border-gond-light-brown' 
-        : 'bg-gond-dark-cream text-gond-dark-text border-gond-dark-brown'
-      }
+      ${theme === 'light' ? 'bg-gond-light-cream text-gond-light-text border-gond-light-brown' : 'bg-gond-dark-cream text-gond-dark-text border-gond-dark-brown'}
     `}>
       {/* Gond art decorative pattern - top border */}
       <div className={`
@@ -26,10 +21,7 @@ const Footer = () => {
           <div>
             <h3 className={`
               text-xl font-montserrat font-medium mb-4 border-b-2 inline-block pb-1 transition-colors duration-500
-              ${theme === 'light' 
-                ? 'text-gond-light-text border-gond-light-orange' 
-                : 'text-gond-dark-text border-gond-dark-orange'
-              }
+              ${theme === 'light' ? 'text-gond-light-text border-gond-light-orange' : 'text-gond-dark-text border-gond-dark-orange'}
             `}>
               Illuminated<span className={`
                 transition-colors duration-500
@@ -43,33 +35,17 @@ const Footer = () => {
               A visual storyteller specializing in video editing, photo editing, and graphic design.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://www.linkedin.com/in/yogesh-sharma-933205317/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`
+              <a href="https://www.linkedin.com/in/yogesh-sharma-933205317/" target="_blank" rel="noopener noreferrer" className={`
                   p-2 rounded-full transition-all duration-300
-                  ${theme === 'light' 
-                    ? 'text-gond-light-textLight bg-gond-light-bg hover:text-gond-light-purple hover:bg-gond-light-cream' 
-                    : 'text-gond-dark-textLight bg-gond-dark-bg hover:text-gond-dark-purple hover:bg-gond-dark-cream'
-                  }
-                `}
-              >
+                  ${theme === 'light' ? 'text-gond-light-textLight bg-gond-light-bg hover:text-gond-light-purple hover:bg-gond-light-cream' : 'text-gond-dark-textLight bg-gond-dark-bg hover:text-gond-dark-purple hover:bg-gond-dark-cream'}
+                `}>
                 <Linkedin size={20} />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a 
-                href="https://www.instagram.com/_.yogeshsharma._/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`
+              <a href="https://www.instagram.com/_.yogeshsharma._/" target="_blank" rel="noopener noreferrer" className={`
                   p-2 rounded-full transition-all duration-300
-                  ${theme === 'light' 
-                    ? 'text-gond-light-textLight bg-gond-light-bg hover:text-gond-light-purple hover:bg-gond-light-cream' 
-                    : 'text-gond-dark-textLight bg-gond-dark-bg hover:text-gond-dark-purple hover:bg-gond-dark-cream'
-                  }
-                `}
-              >
+                  ${theme === 'light' ? 'text-gond-light-textLight bg-gond-light-bg hover:text-gond-light-purple hover:bg-gond-light-cream' : 'text-gond-dark-textLight bg-gond-dark-bg hover:text-gond-dark-purple hover:bg-gond-dark-cream'}
+                `}>
                 <Instagram size={20} />
                 <span className="sr-only">Instagram</span>
               </a>
@@ -79,19 +55,13 @@ const Footer = () => {
           <div>
             <h3 className={`
               text-lg font-medium mb-4 border-b-2 inline-block pb-1 transition-colors duration-500
-              ${theme === 'light' 
-                ? 'text-gond-light-text border-gond-light-blue' 
-                : 'text-gond-dark-text border-gond-dark-blue'
-              }
+              ${theme === 'light' ? 'text-gond-light-text border-gond-light-blue' : 'text-gond-dark-text border-gond-dark-blue'}
             `}>Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className={`
                   flex items-center transition-colors duration-300
-                  ${theme === 'light' 
-                    ? 'text-gond-light-textLight hover:text-gond-light-purple' 
-                    : 'text-gond-dark-textLight hover:text-gond-dark-purple'
-                  }
+                  ${theme === 'light' ? 'text-gond-light-textLight hover:text-gond-light-purple' : 'text-gond-dark-textLight hover:text-gond-dark-purple'}
                 `}>
                   <span className={`
                     inline-block w-2 h-2 mr-2 rounded-full transition-colors duration-500
@@ -103,10 +73,7 @@ const Footer = () => {
               <li>
                 <Link to="/portfolio" className={`
                   flex items-center transition-colors duration-300
-                  ${theme === 'light' 
-                    ? 'text-gond-light-textLight hover:text-gond-light-purple' 
-                    : 'text-gond-dark-textLight hover:text-gond-dark-purple'
-                  }
+                  ${theme === 'light' ? 'text-gond-light-textLight hover:text-gond-light-purple' : 'text-gond-dark-textLight hover:text-gond-dark-purple'}
                 `}>
                   <span className={`
                     inline-block w-2 h-2 mr-2 rounded-full transition-colors duration-500
@@ -118,10 +85,7 @@ const Footer = () => {
               <li>
                 <Link to="/contact" className={`
                   flex items-center transition-colors duration-300
-                  ${theme === 'light' 
-                    ? 'text-gond-light-textLight hover:text-gond-light-purple' 
-                    : 'text-gond-dark-textLight hover:text-gond-dark-purple'
-                  }
+                  ${theme === 'light' ? 'text-gond-light-textLight hover:text-gond-light-purple' : 'text-gond-dark-textLight hover:text-gond-dark-purple'}
                 `}>
                   <span className={`
                     inline-block w-2 h-2 mr-2 rounded-full transition-colors duration-500
@@ -136,10 +100,7 @@ const Footer = () => {
           <div>
             <h3 className={`
               text-lg font-medium mb-4 border-b-2 inline-block pb-1 transition-colors duration-500
-              ${theme === 'light' 
-                ? 'text-gond-light-text border-gond-light-green' 
-                : 'text-gond-dark-text border-gond-dark-green'
-              }
+              ${theme === 'light' ? 'text-gond-light-text border-gond-light-green' : 'text-gond-dark-text border-gond-dark-green'}
             `}>Contact</h3>
             <p className={`
               mb-1 flex items-center transition-colors duration-500
@@ -178,12 +139,10 @@ const Footer = () => {
             <span className={`
               text-xs transition-colors duration-500
               ${theme === 'light' ? 'text-gond-light-textLight' : 'text-gond-dark-textLight'}
-            `}>Inspired by Gond Art</span>
+            `}>Website developed by Yogesh Sharma</span>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
