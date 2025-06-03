@@ -76,18 +76,21 @@ const PortfolioGrid = ({ category }: PortfolioGridProps) => {
           <Link to={`/portfolio/${item.id}`} className="block h-full">
             <div className="relative">
               {item.category === 'videos' && isVideoFile(item.image) ? (
-                <video
-                  src={item.image}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-                  muted
-                  loop
-                  playsInline
-                  onMouseEnter={(e) => e.currentTarget.play()}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.pause();
-                    e.currentTarget.currentTime = 0;
-                  }}
-                />
+                // For videos, show thumbnail if available, otherwise show a static frame of the video
+                item.thumbnail ? (
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <video
+                    src={item.image}
+                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                    muted
+                    preload="metadata"
+                  />
+                )
               ) : item.thumbnail ? (
                 <img
                   src={item.thumbnail}
