@@ -60,11 +60,11 @@ const Navbar = () => {
           
           {/* Decorative dots */}
           <div className={`
-            absolute -top-1 -right-2 w-2 h-2 rounded-full transition-all duration-300
+            absolute -top-1 -right-2 w-2 h-2 rounded-full transition-all duration-500
             ${theme === 'light' ? 'bg-gond-light-orange' : 'bg-gond-dark-orange animate-glow-orange'}
           `} />
           <div className={`
-            absolute -bottom-1 -left-2 w-2 h-2 rounded-full transition-all duration-300
+            absolute -bottom-1 -left-2 w-2 h-2 rounded-full transition-all duration-500
             ${theme === 'light' ? 'bg-gond-light-green' : 'bg-gond-dark-green animate-glow-slow'}
           `} />
         </NavLink>
@@ -76,7 +76,7 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `font-medium transition-all duration-300 relative group ${
+                `font-medium transition-all duration-700 ease-out relative group ${
                   isActive 
                     ? (theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple')
                     : 'gond-text-light hover:gond-text'
@@ -86,7 +86,7 @@ const Navbar = () => {
               {link.label}
               {/* Decorative underline */}
               <div className={`
-                absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full
+                absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-700 ease-out group-hover:w-full
                 ${theme === 'light' ? 'bg-gond-light-orange' : 'bg-gond-dark-orange'}
               `} />
             </NavLink>
@@ -131,7 +131,7 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `font-medium py-3 px-4 rounded-md transition-all duration-300 relative ${
+                  `font-medium py-3 px-4 rounded-md transition-all duration-700 ease-out relative transform hover:scale-105 ${
                     isActive
                       ? (theme === 'light' 
                         ? 'bg-gond-light-purple text-white' 
