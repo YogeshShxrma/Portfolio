@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
@@ -107,19 +106,23 @@ const AdminProjectCard = ({ project, onUpdate }: AdminProjectCardProps) => {
 
       {/* Edit Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="sm:max-w-xl max-h-[90vh] flex flex-col">
-          <DialogHeader>
-            <DialogTitle>Edit Project</DialogTitle>
-          </DialogHeader>
-          <ScrollArea className="flex-1 pr-6">
-            <ProjectForm
-              project={project}
-              onComplete={() => {
-                setIsEditDialogOpen(false);
-                onUpdate();
-              }}
-              onCancel={() => setIsEditDialogOpen(false)}
-            />
+        <DialogContent className="sm:max-w-xl max-h-[85vh] p-0">
+          <div className="p-6 border-b">
+            <DialogHeader>
+              <DialogTitle>Edit Project</DialogTitle>
+            </DialogHeader>
+          </div>
+          <ScrollArea className="max-h-[calc(85vh-80px)] px-6">
+            <div className="py-4">
+              <ProjectForm
+                project={project}
+                onComplete={() => {
+                  setIsEditDialogOpen(false);
+                  onUpdate();
+                }}
+                onCancel={() => setIsEditDialogOpen(false)}
+              />
+            </div>
           </ScrollArea>
         </DialogContent>
       </Dialog>

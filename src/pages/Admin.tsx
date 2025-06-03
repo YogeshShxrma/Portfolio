@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProjectData, ProjectService } from "@/services/ProjectService";
@@ -7,6 +6,7 @@ import Footer from "@/components/Footer";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ProjectForm } from "@/components/ProjectForm";
 import { toast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -216,14 +216,20 @@ const Admin = () => {
       </main>
 
       <Dialog open={isAddFormOpen} onOpenChange={setIsAddFormOpen}>
-        <DialogContent className="sm:max-w-xl">
-          <DialogHeader>
-            <DialogTitle>Add New Project</DialogTitle>
-          </DialogHeader>
-          <ProjectForm
-            onComplete={handleFormComplete}
-            onCancel={() => setIsAddFormOpen(false)}
-          />
+        <DialogContent className="sm:max-w-xl max-h-[85vh] p-0">
+          <div className="p-6 border-b">
+            <DialogHeader>
+              <DialogTitle>Add New Project</DialogTitle>
+            </DialogHeader>
+          </div>
+          <ScrollArea className="max-h-[calc(85vh-80px)] px-6">
+            <div className="py-4">
+              <ProjectForm
+                onComplete={handleFormComplete}
+                onCancel={() => setIsAddFormOpen(false)}
+              />
+            </div>
+          </ScrollArea>
         </DialogContent>
       </Dialog>
 
