@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -197,10 +196,10 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
                 'fade-in': 'fade-in 0.5s ease-out',
-                'glow-slow': 'glow 4s ease-in-out infinite',
-                'glow-orange': 'glow-orange 3s ease-in-out infinite',
+                'glow-slow': 'glow 8s ease-in-out infinite',
+                'glow-orange': 'glow-orange 6s ease-in-out infinite',
                 'theme-switch': 'theme-switch 0.5s ease-in-out',
-                'peacock-float': 'peacock-float 6s ease-in-out infinite',
+                'peacock-float': 'peacock-float 12s ease-in-out infinite',
 			}
 		}
 	},
