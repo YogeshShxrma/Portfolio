@@ -35,6 +35,10 @@ const Index = () => {
     }
   };
 
+  const isVideoFile = (url: string) => {
+    return url.includes('.mp4') || url.includes('.mov') || url.includes('.webm') || url.includes('.avi');
+  };
+
   return (
     <>
       <Navbar />
@@ -241,14 +245,37 @@ const Index = () => {
               {featuredProjects.length > 0 ? (
                 featuredProjects.map((project, index) => (
                   <div key={project.id} className="group portfolio-item gond-card relative overflow-hidden">
-                    {project.category === 'videos' && (project.image.includes('video') || project.image.includes('.mp4') || project.image.includes('.mov')) ? (
-                      <video 
-                        src={project.image} 
-                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
-                        muted
-                        onMouseEnter={(e) => e.currentTarget.play()}
-                        onMouseLeave={(e) => e.currentTarget.pause()}
-                      />
+                    {project.category === 'videos' && isVideoFile(project.image) ? (
+                      <div className="relative w-full h-72">
+                        {project.thumbnail ? (
+                          <>
+                            <img 
+                              src={project.thumbnail} 
+                              alt={project.title} 
+                              className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 group-hover:opacity-0" 
+                            />
+                            <video 
+                              src={project.image} 
+                              className="absolute inset-0 w-full h-72 object-cover transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
+                              muted
+                              loop
+                              onMouseEnter={(e) => e.currentTarget.play()}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.pause();
+                                e.currentTarget.currentTime = 0;
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <video 
+                            src={project.image} 
+                            className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                            muted
+                            onMouseEnter={(e) => e.currentTarget.play()}
+                            onMouseLeave={(e) => e.currentTarget.pause()}
+                          />
+                        )}
+                      </div>
                     ) : (
                       <img 
                         src={project.image} 
