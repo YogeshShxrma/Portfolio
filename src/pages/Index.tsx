@@ -259,6 +259,7 @@ const Index = () => {
                             className="absolute inset-0 w-full h-72 object-cover transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
                             muted
                             loop
+                            playsInline
                             onMouseEnter={(e) => e.currentTarget.play()}
                             onMouseLeave={(e) => {
                               e.currentTarget.pause();
@@ -271,8 +272,13 @@ const Index = () => {
                           src={project.image} 
                           className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
                           muted
+                          loop
+                          playsInline
                           onMouseEnter={(e) => e.currentTarget.play()}
-                          onMouseLeave={(e) => e.currentTarget.pause()}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.pause();
+                            e.currentTarget.currentTime = 0;
+                          }}
                         />
                       )}
                     </div>

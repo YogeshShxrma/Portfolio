@@ -78,17 +78,39 @@ const PortfolioGrid = ({ category }: PortfolioGridProps) => {
               {item.category === 'videos' && isVideoFile(item.image) ? (
                 // For videos, show thumbnail if available, otherwise show a static frame of the video
                 item.thumbnail ? (
-                  <img
-                    src={item.thumbnail}
-                    alt={item.title}
-                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  <>
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-full h-64 object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-0"
+                    />
+                    <video
+                      src={item.image}
+                      className="absolute inset-0 w-full h-64 object-cover transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      onMouseEnter={(e) => e.currentTarget.play()}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.pause();
+                        e.currentTarget.currentTime = 0;
+                      }}
+                    />
+                  </>
                 ) : (
                   <video
                     src={item.image}
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                     muted
+                    loop
+                    playsInline
                     preload="metadata"
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.pause();
+                      e.currentTarget.currentTime = 0;
+                    }}
                   />
                 )
               ) : item.thumbnail ? (
