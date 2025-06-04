@@ -47,21 +47,33 @@ const Index = () => {
     { name: "Motion Graphics", percentage: 80, color: "blue" }
   ];
 
-  const placeholderProjects = [
+  const placeholderProjects: ProjectData[] = [
     { 
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158", 
-      category: "Photography", 
-      title: "Urban Perspectives"
+      id: "placeholder-1",
+      title: "Urban Perspectives",
+      description: "Contemporary urban photography showcasing city life",
+      category: "photos",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      date: "2024-01-15",
+      featured: true
     },
     { 
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d", 
-      category: "Video", 
-      title: "Product Launch"
+      id: "placeholder-2",
+      title: "Product Launch",
+      description: "Dynamic video content for product marketing",
+      category: "videos",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+      date: "2024-02-20",
+      featured: true
     },
     { 
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085", 
-      category: "Graphics", 
-      title: "Brand Identity"
+      id: "placeholder-3",
+      title: "Brand Identity",
+      description: "Complete visual identity design for modern brands",
+      category: "graphics",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      date: "2024-03-10",
+      featured: true
     }
   ];
 
@@ -232,7 +244,7 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
               {(featuredProjects.length > 0 ? featuredProjects : placeholderProjects).map((project, index) => (
-                <div key={project.id || index} className="group portfolio-item gond-card relative overflow-hidden">
+                <div key={project.id} className="group portfolio-item gond-card relative overflow-hidden">
                   {project.category === 'videos' && isVideoFile(project.image) ? (
                     <div className="relative w-full h-72">
                       {project.thumbnail ? (
