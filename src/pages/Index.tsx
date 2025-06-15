@@ -199,10 +199,7 @@ const Index = () => {
                   Work
                 </span>
               </h2>
-              <p className="gond-text-light mb-12 max-w-2xl mx-auto">
-                Selected projects from my portfolio demonstrating the range of my visual creativity, 
-                each piece infused with the spirit of traditional Gond artistry.
-              </p>
+              <p className="gond-text-light mb-12 max-w-2xl mx-auto">Selected projects from my portfolio demonstrating the range of my visual creativity.</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
