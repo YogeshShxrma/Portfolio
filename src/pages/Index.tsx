@@ -45,7 +45,7 @@ const Index = () => {
     percentage: 85,
     color: "green"
   }, {
-    name: "Motion Graphics",
+    name: "Web Designing",
     percentage: 80,
     color: "blue"
   }];
