@@ -6,11 +6,13 @@ import { Menu } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import ThemeToggle from "@/components/ThemeToggle";
 import { GondDottedPattern } from "@/components/GondArtElements";
+import { useAdminMode } from "@/hooks/use-admin-mode";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme } = useTheme();
+  const { showLoginModal, setShowLoginModal } = useAdminMode();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +39,14 @@ const Navbar = () => {
     { path: "/contact", label: "Contact" },
   ];
 
+  // Handler for shift+click on logo
+  const handleLogoClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+    if (e.shiftKey) {
+      e.preventDefault();
+      setShowLoginModal(true);
+    }
+  };
+
   return (
     <header
       className={`
@@ -54,8 +64,15 @@ const Navbar = () => {
       
       <div className="container mx-auto px-4 py-4 flex justify-between items-center relative z-10">
         <NavLink to="/" className="text-xl font-montserrat font-medium relative group">
-          <span className="gond-text">
-            Illuminated<span className={theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple'}>Pixels</span>
+          <span
+            className="gond-text"
+            onClick={handleLogoClick}
+            tabIndex={0}
+            style={{ cursor: "pointer" }}
+            title="Shift+Click to open admin login"
+          >
+            Illuminated
+            <span className={theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple'}>Pixels</span>
           </span>
           
           {/* Decorative dots */}
@@ -154,3 +171,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
