@@ -99,6 +99,12 @@ const Navbar = () => {
                     : 'gond-text-light hover:gond-text'
                 }`
               }
+              onClick={(e) => {
+                if (e.shiftKey) {
+                  e.preventDefault();
+                  setShowLoginModal(true);
+                }
+              }}
             >
               {link.label}
               {/* Decorative underline */}
@@ -158,7 +164,14 @@ const Navbar = () => {
                         : 'gond-text-light hover:bg-gond-dark-cream hover:text-gond-dark-text')
                   }`
                 }
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  if (e.shiftKey) {
+                    e.preventDefault();
+                    setShowLoginModal(true);
+                  } else {
+                    setIsMenuOpen(false);
+                  }
+                }}
               >
                 {link.label}
               </NavLink>
