@@ -41,7 +41,7 @@ const Navbar = () => {
 
   // Handler for shift+click on logo
   const handleLogoClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (e.shiftKey) {
+    if (e.shiftKey || e.metaKey || e.ctrlKey) {
       e.preventDefault();
       setShowLoginModal(true);
     }
