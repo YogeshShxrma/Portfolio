@@ -18,6 +18,13 @@ export interface ProjectData {
 }
 
 export class ProjectService {
+  static sanitizeFileName(fileName: string): string {
+    const sanitized = fileName.replace(/[^\x20-\x7E]/g, '').replace(/\s+/g, '_');
+    const ext = sanitized.split('.').pop() || 'file';
+    const name = sanitized.replace(/\.[^/.]+$/, '');
+    return name.length > 0 ? `${name}.${ext}` : `upload_${Date.now()}.${ext}`;
+  }
+
   static async getProjects(): Promise<ProjectData[]> {
     try {
       const { data, error } = await supabase
@@ -125,7 +132,7 @@ export class ProjectService {
       
       // Upload image if provided
       if (imageFile) {
-        const filePath = `${Date.now()}_${imageFile.name}`;
+        const filePath = `${Date.now()}_${ProjectService.sanitizeFileName(imageFile.name)}`;
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from('project-images')
           .upload(filePath, imageFile);
@@ -142,7 +149,7 @@ export class ProjectService {
       
       // Upload thumbnail if provided
       if (thumbnailFile) {
-        const thumbPath = `thumbnails/${Date.now()}_${thumbnailFile.name}`;
+        const thumbPath = `thumbnails/${Date.now()}_${ProjectService.sanitizeFileName(thumbnailFile.name)}`;
         const { data: thumbUploadData, error: thumbUploadError } = await supabase.storage
           .from('project-images')
           .upload(thumbPath, thumbnailFile);
@@ -188,7 +195,7 @@ export class ProjectService {
       
       // Upload new image if provided
       if (imageFile) {
-        const filePath = `${Date.now()}_${imageFile.name}`;
+        const filePath = `${Date.now()}_${ProjectService.sanitizeFileName(imageFile.name)}`;
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from('project-images')
           .upload(filePath, imageFile);
@@ -205,7 +212,7 @@ export class ProjectService {
       
       // Upload new thumbnail if provided
       if (thumbnailFile) {
-        const thumbPath = `thumbnails/${Date.now()}_${thumbnailFile.name}`;
+        const thumbPath = `thumbnails/${Date.now()}_${ProjectService.sanitizeFileName(thumbnailFile.name)}`;
         const { data: thumbUploadData, error: thumbUploadError } = await supabase.storage
           .from('project-images')
           .upload(thumbPath, thumbnailFile);
