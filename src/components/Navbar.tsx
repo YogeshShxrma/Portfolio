@@ -40,9 +40,10 @@ const Navbar = () => {
   ];
 
   // Handler for shift+click on logo
-  const handleLogoClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleLogoClick = (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey) {
       e.preventDefault();
+      e.stopPropagation();
       setShowLoginModal(true);
     }
   };
@@ -63,13 +64,11 @@ const Navbar = () => {
       {isScrolled && <div className="gond-border-decorative" />}
       
       <div className="container mx-auto px-4 py-4 flex justify-between items-center relative z-10">
-        <NavLink to="/" className="text-xl font-montserrat font-medium relative group">
+        <NavLink to="/" className="text-xl font-montserrat font-medium relative group" onClick={handleLogoClick}>
           <span
             className="gond-text"
-            onClick={handleLogoClick}
             tabIndex={0}
             style={{ cursor: "pointer" }}
-            title=""
           >
             Illuminated
             <span className={theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple'}>Pixels</span>
