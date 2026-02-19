@@ -41,7 +41,7 @@ const Navbar = () => {
 
   // Handler for shift+click on logo
   const handleLogoClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (e.shiftKey || e.metaKey || e.ctrlKey) {
+    if (e.metaKey || e.ctrlKey) {
       e.preventDefault();
       setShowLoginModal(true);
     }
@@ -69,7 +69,7 @@ const Navbar = () => {
             onClick={handleLogoClick}
             tabIndex={0}
             style={{ cursor: "pointer" }}
-            title="Shift+Click to open admin login"
+            title=""
           >
             Illuminated
             <span className={theme === 'light' ? 'text-gond-light-purple' : 'text-gond-dark-purple'}>Pixels</span>
@@ -100,7 +100,7 @@ const Navbar = () => {
                 }`
               }
               onClick={(e) => {
-                if (e.shiftKey) {
+                if (e.metaKey || e.ctrlKey) {
                   e.preventDefault();
                   setShowLoginModal(true);
                 }
@@ -165,7 +165,7 @@ const Navbar = () => {
                   }`
                 }
                 onClick={(e) => {
-                  if (e.shiftKey) {
+                  if (e.metaKey || e.ctrlKey) {
                     e.preventDefault();
                     setShowLoginModal(true);
                   } else {
